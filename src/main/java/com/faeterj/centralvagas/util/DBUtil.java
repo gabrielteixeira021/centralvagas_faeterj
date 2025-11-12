@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.faeterj.centralvagas.util;
 
 import java.sql.Connection;
@@ -12,13 +8,8 @@ public class DBUtil {
 
     private static final String URL = "jdbc:mysql://localhost:3306/centralvagas?useSSL=false&serverTimezone=America/Sao_Paulo";
     private static final String USER = "root";
-<<<<<<< HEAD
     private static final String PASSWORD = "";
 
-=======
-    private static final String PASSWORD = ""; 
-    
->>>>>>> 14f50b78af79445e45e40511073878102820e1ac
     public static Connection getConnection() throws SQLException {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
