@@ -1,0 +1,19 @@
+<<<<<<< HEAD
+com\faeterj\centralvagas\dao\AlunoDAO.class
+com\faeterj\centralvagas\dao\EmpresaDAO.class
+com\mycompany\ap6\resources\JakartaEE11Resource.class
+com\faeterj\centralvagas\servlets\AlunoServlet.class
+com\faeterj\centralvagas\servlets\VagasServlet.class
+com\faeterj\centralvagas\dao\CandidaturaDAO.class
+com\faeterj\centralvagas\model\Candidatura.class
+com\faeterj\centralvagas\util\DBUtil.class
+com\mycompany\ap6\JakartaRestConfiguration.class
+com\faeterj\centralvagas\model\Aluno.class
+com\faeterj\centralvagas\model\Empresa.class
+com\faeterj\centralvagas\servlets\EmpresaServlet.class
+com\faeterj\centralvagas\dao\VagaDAO.class
+com\faeterj\centralvagas\model\Vaga.class
+=======
+com\mycompany\ap6\resources\JakartaEE11Resource.class
+com\mycompany\ap6\JakartaRestConfiguration.class
+>>>>>>> a4f1cfc2014c2878b21c1e346007a7824a7bbb5b

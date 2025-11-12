@@ -1,0 +1,31 @@
+<<<<<<< HEAD
+C:\Users\gabriel\Desktop\Repositórios\Java-Workspace\4POA_AP6_AV2\src\main\java\com\faeterj\centralvagas\dao\AlunoDAO.java
+C:\Users\gabriel\Desktop\Repositórios\Java-Workspace\4POA_AP6_AV2\src\main\java\com\faeterj\centralvagas\dao\CandidaturaDAO.java
+C:\Users\gabriel\Desktop\Repositórios\Java-Workspace\4POA_AP6_AV2\src\main\java\com\faeterj\centralvagas\dao\EmpresaDAO.java
+C:\Users\gabriel\Desktop\Repositórios\Java-Workspace\4POA_AP6_AV2\src\main\java\com\faeterj\centralvagas\dao\VagaDAO.java
+C:\Users\gabriel\Desktop\Repositórios\Java-Workspace\4POA_AP6_AV2\src\main\java\com\faeterj\centralvagas\model\Aluno.java
+C:\Users\gabriel\Desktop\Repositórios\Java-Workspace\4POA_AP6_AV2\src\main\java\com\faeterj\centralvagas\model\Candidatura.java
+C:\Users\gabriel\Desktop\Repositórios\Java-Workspace\4POA_AP6_AV2\src\main\java\com\faeterj\centralvagas\model\Empresa.java
+C:\Users\gabriel\Desktop\Repositórios\Java-Workspace\4POA_AP6_AV2\src\main\java\com\faeterj\centralvagas\model\Vaga.java
+C:\Users\gabriel\Desktop\Repositórios\Java-Workspace\4POA_AP6_AV2\src\main\java\com\faeterj\centralvagas\servlets\AlunoServlet.java
+C:\Users\gabriel\Desktop\Repositórios\Java-Workspace\4POA_AP6_AV2\src\main\java\com\faeterj\centralvagas\servlets\EmpresaServlet.java
+C:\Users\gabriel\Desktop\Repositórios\Java-Workspace\4POA_AP6_AV2\src\main\java\com\faeterj\centralvagas\servlets\VagasServlet.java
+C:\Users\gabriel\Desktop\Repositórios\Java-Workspace\4POA_AP6_AV2\src\main\java\com\faeterj\centralvagas\util\DBUtil.java
+C:\Users\gabriel\Desktop\Repositórios\Java-Workspace\4POA_AP6_AV2\src\main\java\com\mycompany\ap6\JakartaRestConfiguration.java
+C:\Users\gabriel\Desktop\Repositórios\Java-Workspace\4POA_AP6_AV2\src\main\java\com\mycompany\ap6\resources\JakartaEE11Resource.java
+=======
+C:\Users\Micro\Desktop\AP6\src\main\java\com\faeterj\centralvagas\dao\AlunoDAO.java
+C:\Users\Micro\Desktop\AP6\src\main\java\com\faeterj\centralvagas\dao\CandidaturaDAO.java
+C:\Users\Micro\Desktop\AP6\src\main\java\com\faeterj\centralvagas\dao\EmpresaDAO.java
+C:\Users\Micro\Desktop\AP6\src\main\java\com\faeterj\centralvagas\dao\VagaDAO.java
+C:\Users\Micro\Desktop\AP6\src\main\java\com\faeterj\centralvagas\model\Aluno.java
+C:\Users\Micro\Desktop\AP6\src\main\java\com\faeterj\centralvagas\model\Candidatura.java
+C:\Users\Micro\Desktop\AP6\src\main\java\com\faeterj\centralvagas\model\Empresa.java
+C:\Users\Micro\Desktop\AP6\src\main\java\com\faeterj\centralvagas\model\Vaga.java
+C:\Users\Micro\Desktop\AP6\src\main\java\com\faeterj\centralvagas\servlets\AlunoServlet.java
+C:\Users\Micro\Desktop\AP6\src\main\java\com\faeterj\centralvagas\servlets\EmpresaServlet.java
+C:\Users\Micro\Desktop\AP6\src\main\java\com\faeterj\centralvagas\servlets\VagasServlet.java
+C:\Users\Micro\Desktop\AP6\src\main\java\com\faeterj\centralvagas\util\DBUtil.java
+C:\Users\Micro\Desktop\AP6\src\main\java\com\mycompany\ap6\JakartaRestConfiguration.java
+C:\Users\Micro\Desktop\AP6\src\main\java\com\mycompany\ap6\resources\JakartaEE11Resource.java
+>>>>>>> a4f1cfc2014c2878b21c1e346007a7824a7bbb5b
