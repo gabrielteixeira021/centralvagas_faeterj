@@ -11,9 +11,9 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet(name = "AlunoServlet", urlPatterns = {"/aluno"})
+@WebServlet(name = "AlunoServlet", urlPatterns = { "/aluno" })
 public class AlunoServlet extends HttpServlet {
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -32,7 +32,7 @@ public class AlunoServlet extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         String operacao = request.getParameter("operacao"); // ex: "inserir", "atualizar".
-        
+
         String nome = request.getParameter("nome");
         String email = request.getParameter("email");
         String telefone = request.getParameter("telefone");
