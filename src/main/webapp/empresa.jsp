@@ -60,7 +60,7 @@
                 </div>
 
                 <!-- Navigation Container -->
-                <div class="flex flex-col flex-1 justify-between overflow-y-auto">
+                <div class="flex flex-col flex-1 justify-between overflow-y-auto overflow-x-hidden">
                     <!-- Main Navigation -->
                     <nav class="py-4">
                         <a href="index.jsp"
