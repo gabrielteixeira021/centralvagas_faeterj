@@ -42,15 +42,7 @@
 
     <body class="h-full bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
         <div class="flex h-full">
-            <!-- Mobile Header -->
-            <header
-                class="md:hidden fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 py-3 bg-slate-800 text-white shadow-lg">
-                <div class="w-8"></div>
-                <h1 id="mobile-system-title" class="text-lg font-semibold text-center flex-1">Central de Vagas</h1>
-                <button onclick="toggleTheme()" class="p-2 rounded-lg hover:bg-slate-700 transition-colors">
-                    <span id="mobile-theme-icon" class="text-xl">🌙</span>
-                </button>
-            </header>
+            <!-- Mobile Header será renderizado pelo componente JavaScript -->
 
             <!-- Sidebar -->
             <aside id="sidebar"
@@ -293,6 +285,7 @@
         </div>
 
         <!-- JavaScript Files -->
+        <script src="assets/js/components/MobileHeader.js"></script>
         <script src="assets/js/components/BottomNavigationBar.js"></script>
         <script src="assets/js/common.js"></script>
         <script src="assets/js/vagas.js"></script>
