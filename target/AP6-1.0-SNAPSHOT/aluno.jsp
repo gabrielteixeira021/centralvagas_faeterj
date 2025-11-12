@@ -44,17 +44,15 @@
         <div class="flex h-full">
             <!-- Mobile Header será renderizado pelo componente JavaScript -->
 
-            <!-- Sidebar -->
-            <aside id="sidebar"
-                class="hidden md:flex flex-col bg-slate-800 text-white shadow-xl transition-all duration-300 w-72 sidebar-expanded">
+            <!-- Sidebar Desktop -->
+            <aside id="sidebar" class="hidden md:flex flex-col bg-slate-800 text-white shadow-xl transition-all duration-300 w-72 sidebar-expanded">
                 <!-- Sidebar Header -->
                 <div class="flex items-center justify-between p-6 bg-slate-900 border-b border-slate-700">
                     <div class="sidebar-title">
                         <h1 id="system-title" class="text-xl font-semibold mb-1">Central de Vagas</h1>
                         <p id="institution-name" class="text-sm text-slate-400">Faeterj-Rio</p>
                     </div>
-                    <button onclick="toggleSidebar()"
-                        class="p-2 rounded-lg hover:bg-slate-700 transition-colors collapse-btn">
+                    <button onclick="toggleSidebar()" class="p-2 rounded-lg hover:bg-slate-700 transition-colors collapse-btn">
                         <span class="text-lg">◀</span>
                     </button>
                 </div>
@@ -63,42 +61,31 @@
                 <div class="flex flex-col flex-1 justify-between overflow-y-auto">
                     <!-- Main Navigation -->
                     <nav class="py-4">
-                        <a href="index.jsp"
-                            class="nav-item px-6 py-3 flex items-center gap-3 cursor-pointer hover:bg-slate-700 border-l-4 border-transparent hover:border-blue-500 transition-all block no-underline text-inherit">
+                        <a href="index.jsp" class="nav-item px-6 py-3 flex items-center gap-3 text-white hover:bg-slate-700 transition-all no-underline">
                             <span class="nav-icon text-xl w-6 text-center flex-shrink-0">🏠</span>
                             <span class="nav-text">Página Inicial</span>
-                            <div
-                                class="nav-tooltip absolute left-16 bg-slate-800 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap opacity-0 invisible transition-all z-50 shadow-lg">
+                            <div class="nav-tooltip absolute left-16 bg-slate-800 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap opacity-0 invisible transition-all z-50 shadow-lg">
                                 Página Inicial
                             </div>
                         </a>
-
-                        <a href="vagas.jsp"
-                            class="nav-item px-6 py-3 flex items-center gap-3 cursor-pointer hover:bg-slate-700 border-l-4 border-transparent hover:border-blue-500 transition-all block no-underline text-inherit">
+                        <a href="vagas.jsp" class="nav-item px-6 py-3 flex items-center gap-3 text-white hover:bg-slate-700 transition-all no-underline">
                             <span class="nav-icon text-xl w-6 text-center flex-shrink-0">💼</span>
                             <span class="nav-text">Consulta de Vagas</span>
-                            <div
-                                class="nav-tooltip absolute left-16 bg-slate-800 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap opacity-0 invisible transition-all z-50 shadow-lg">
+                            <div class="nav-tooltip absolute left-16 bg-slate-800 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap opacity-0 invisible transition-all z-50 shadow-lg">
                                 Consulta de Vagas
                             </div>
                         </a>
-
-                        <a href="aluno.jsp"
-                            class="nav-item active bg-slate-700 border-blue-500 text-blue-400 px-6 py-3 flex items-center gap-3 cursor-pointer hover:bg-slate-700 border-l-4 border-transparent hover:border-blue-500 transition-all block no-underline text-inherit">
+                        <a href="aluno.jsp" class="nav-item active bg-slate-700 border-r-4 border-blue-500 text-blue-400 px-6 py-3 flex items-center gap-3 hover:bg-slate-700 transition-all no-underline">
                             <span class="nav-icon text-xl w-6 text-center flex-shrink-0">👤</span>
                             <span class="nav-text">Cadastro do Aluno</span>
-                            <div
-                                class="nav-tooltip absolute left-16 bg-slate-800 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap opacity-0 invisible transition-all z-50 shadow-lg">
+                            <div class="nav-tooltip absolute left-16 bg-slate-800 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap opacity-0 invisible transition-all z-50 shadow-lg">
                                 Cadastro do Aluno
                             </div>
                         </a>
-
-                        <a href="empresa.jsp"
-                            class="nav-item px-6 py-3 flex items-center gap-3 cursor-pointer hover:bg-slate-700 border-l-4 border-transparent hover:border-blue-500 transition-all block no-underline text-inherit">
+                        <a href="empresa.jsp" class="nav-item px-6 py-3 flex items-center gap-3 text-white hover:bg-slate-700 transition-all no-underline">
                             <span class="nav-icon text-xl w-6 text-center flex-shrink-0">🏢</span>
                             <span class="nav-text">Área da Empresa</span>
-                            <div
-                                class="nav-tooltip absolute left-16 bg-slate-800 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap opacity-0 invisible transition-all z-50 shadow-lg">
+                            <div class="nav-tooltip absolute left-16 bg-slate-800 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap opacity-0 invisible transition-all z-50 shadow-lg">
                                 Área da Empresa
                             </div>
                         </a>
@@ -106,13 +93,10 @@
 
                     <!-- Theme Toggle - Bottom -->
                     <div class="border-t border-slate-700 py-4">
-                        <div onclick="toggleTheme()"
-                            class="nav-item px-6 py-3 flex items-center gap-3 cursor-pointer hover:bg-slate-700 transition-all">
-                            <span id="desktop-theme-icon"
-                                class="nav-icon text-xl w-6 text-center flex-shrink-0">🌙</span>
+                        <div onclick="toggleTheme()" class="nav-item px-6 py-3 flex items-center gap-3 cursor-pointer hover:bg-slate-700 transition-all">
+                            <span id="desktop-theme-icon" class="nav-icon text-xl w-6 text-center flex-shrink-0">🌙</span>
                             <span class="nav-text theme-text">Tema Escuro</span>
-                            <div
-                                class="nav-tooltip absolute left-16 bg-slate-800 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap opacity-0 invisible transition-all z-50 shadow-lg">
+                            <div class="nav-tooltip absolute left-16 bg-slate-800 text-white px-3 py-2 rounded-lg text-sm whitespace-nowrap opacity-0 invisible transition-all z-50 shadow-lg">
                                 Alternar Tema
                             </div>
                         </div>

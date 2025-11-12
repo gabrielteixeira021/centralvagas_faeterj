@@ -109,19 +109,12 @@ function toggleSidebar() {
 }
 
 /**
- * Responsive sidebar handling
+ * Responsive sidebar handling - Removido para não interferir com classes CSS do componente
+ * O componente Sidebar já usa 'hidden md:flex' do Tailwind para responsividade
  */
 function handleResize() {
-  const sidebar = document.getElementById("sidebar");
-  if (sidebar) {
-    if (window.innerWidth >= 768) {
-      sidebar.classList.remove("hidden");
-      sidebar.classList.add("flex");
-    } else {
-      sidebar.classList.add("hidden");
-      sidebar.classList.remove("flex");
-    }
-  }
+  // Função mantida por compatibilidade, mas sem lógica de alteração de classes
+  // O componente Sidebar gerencia sua própria responsividade via CSS
 }
 
 /**
@@ -131,11 +124,8 @@ function initializeCommon() {
   // Load saved theme
   loadSavedTheme();
 
-  // Setup responsive sidebar
-  handleResize();
-
-  // Add event listeners
-  window.addEventListener("resize", handleResize);
+  // Responsive sidebar é gerenciado automaticamente pelo componente Sidebar via CSS
+  // Removido handleResize() e event listeners para evitar conflitos
 }
 
 // Initialize when DOM is loaded
