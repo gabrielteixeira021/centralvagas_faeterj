@@ -289,34 +289,11 @@
                 </div>
             </main>
 
-            <!-- Bottom Navigation - Mobile only -->
-            <nav class="md:hidden fixed bottom-0 left-0 right-0 bg-slate-800 border-t border-slate-700 z-40">
-                <div class="flex">
-                    <a href="index.jsp"
-                        class="bottom-nav-item text-gray-400 flex-1 flex flex-col items-center py-2 px-1 hover:text-white transition-colors no-underline">
-                        <span class="text-xl mb-1">🏠</span>
-                        <span class="text-xs font-medium">Início</span>
-                    </a>
-                    <a href="vagas.jsp"
-                        class="bottom-nav-item active text-blue-400 border-t-2 border-blue-400 flex-1 flex flex-col items-center py-2 px-1 hover:text-white transition-colors no-underline">
-                        <span class="text-xl mb-1">💼</span>
-                        <span class="text-xs font-medium">Vagas</span>
-                    </a>
-                    <a href="aluno.jsp"
-                        class="bottom-nav-item text-gray-400 flex-1 flex flex-col items-center py-2 px-1 hover:text-white transition-colors no-underline">
-                        <span class="text-xl mb-1">👤</span>
-                        <span class="text-xs font-medium">Cadastro</span>
-                    </a>
-                    <a href="empresa.jsp"
-                        class="bottom-nav-item text-gray-400 flex-1 flex flex-col items-center py-2 px-1 hover:text-white transition-colors no-underline">
-                        <span class="text-xl mb-1">🏢</span>
-                        <span class="text-xs font-medium">Empresa</span>
-                    </a>
-                </div>
-            </nav>
+            <!-- Bottom Navigation será renderizada pelo componente JavaScript -->
         </div>
 
         <!-- JavaScript Files -->
+        <script src="assets/js/components/BottomNavigationBar.js"></script>
         <script src="assets/js/common.js"></script>
         <script src="assets/js/vagas.js"></script>
     </body>

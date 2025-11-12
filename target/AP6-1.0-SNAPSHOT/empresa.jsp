@@ -295,29 +295,10 @@
         </div>
         </div>
 
-        <!-- Mobile Bottom Navigation -->
-        <nav class="md:hidden fixed bottom-0 left-0 right-0 bg-slate-800 text-white border-t border-slate-700 z-30">
-            <div class="flex justify-around">
-                <a href="index.jsp" class="flex flex-col items-center py-3 px-2">
-                    <span class="text-lg mb-1">🏠</span>
-                    <span class="text-xs">Início</span>
-                </a>
-                <a href="vagas.jsp" class="flex flex-col items-center py-3 px-2">
-                    <span class="text-lg mb-1">💼</span>
-                    <span class="text-xs">Vagas</span>
-                </a>
-                <a href="aluno.jsp" class="flex flex-col items-center py-3 px-2">
-                    <span class="text-lg mb-1">👤</span>
-                    <span class="text-xs">Aluno</span>
-                </a>
-                <a href="empresa.jsp" class="flex flex-col items-center py-3 px-2 text-blue-400">
-                    <span class="text-lg mb-1">🏢</span>
-                    <span class="text-xs">Empresa</span>
-                </a>
-            </div>
-        </nav>
+        <!-- Bottom Navigation será renderizada pelo componente JavaScript -->
 
         <!-- JavaScript Files -->
+        <script src="assets/js/components/BottomNavigationBar.js"></script>
         <script src="assets/js/common.js"></script>
         <script src="assets/js/empresa.js"></script>
         </main>

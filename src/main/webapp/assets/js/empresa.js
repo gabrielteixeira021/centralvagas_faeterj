@@ -6,99 +6,107 @@
  * Job management functionality
  */
 class JobManager {
-    constructor() {
-        this.jobs = [];
-        this.initializeJobForm();
-        this.initializeJobsTable();
+  constructor() {
+    this.jobs = [];
+    this.initializeJobForm();
+    this.initializeJobsTable();
+  }
+
+  initializeJobForm() {
+    const form = document.getElementById("new-job-form");
+    if (form) {
+      form.addEventListener("submit", (e) => this.handleJobSubmission(e));
     }
+  }
 
-    initializeJobForm() {
-        const form = document.getElementById('new-job-form');
-        if (form) {
-            form.addEventListener('submit', (e) => this.handleJobSubmission(e));
-        }
+  initializeJobsTable() {
+    const actionButtons = document.querySelectorAll(".job-action-btn");
+    actionButtons.forEach((button) => {
+      button.addEventListener("click", (e) => this.handleJobAction(e));
+    });
+  }
+
+  handleJobSubmission(event) {
+    event.preventDefault();
+
+    const formData = new FormData(event.target);
+    const jobData = {
+      id: Date.now(),
+      title: formData.get("job-title"),
+      description: formData.get("job-description"),
+      requirements: formData.get("job-requirements"),
+      salary: formData.get("job-salary"),
+      location: formData.get("job-location"),
+      type: formData.get("job-type"),
+      deadline: formData.get("application-deadline"),
+      createdAt: new Date().toLocaleDateString("pt-BR"),
+    };
+
+    this.addJob(jobData);
+    this.showSuccessMessage("Vaga publicada com sucesso!");
+    event.target.reset();
+  }
+
+  addJob(jobData) {
+    this.jobs.push(jobData);
+    this.renderJobsTable();
+  }
+
+  handleJobAction(event) {
+    const action = event.target.getAttribute("data-action");
+    const jobId = event.target.getAttribute("data-job-id");
+
+    switch (action) {
+      case "view":
+        this.viewJob(jobId);
+        break;
+      case "edit":
+        this.editJob(jobId);
+        break;
+      case "delete":
+        this.deleteJob(jobId);
+        break;
+      case "candidates":
+        this.viewCandidates(jobId);
+        break;
     }
+  }
 
-    initializeJobsTable() {
-        const actionButtons = document.querySelectorAll('.job-action-btn');
-        actionButtons.forEach(button => {
-            button.addEventListener('click', (e) => this.handleJobAction(e));
-        });
-    }
-
-    handleJobSubmission(event) {
-        event.preventDefault();
-        
-        const formData = new FormData(event.target);
-        const jobData = {
-            id: Date.now(),
-            title: formData.get('job-title'),
-            description: formData.get('job-description'),
-            requirements: formData.get('job-requirements'),
-            salary: formData.get('job-salary'),
-            location: formData.get('job-location'),
-            type: formData.get('job-type'),
-            deadline: formData.get('application-deadline'),
-            createdAt: new Date().toLocaleDateString('pt-BR')
-        };
-
-        this.addJob(jobData);
-        this.showSuccessMessage('Vaga publicada com sucesso!');
-        event.target.reset();
-    }
-
-    addJob(jobData) {
-        this.jobs.push(jobData);
-        this.renderJobsTable();
-    }
-
-    handleJobAction(event) {
-        const action = event.target.getAttribute('data-action');
-        const jobId = event.target.getAttribute('data-job-id');
-        
-        switch (action) {
-            case 'view':
-                this.viewJob(jobId);
-                break;
-            case 'edit':
-                this.editJob(jobId);
-                break;
-            case 'delete':
-                this.deleteJob(jobId);
-                break;
-            case 'candidates':
-                this.viewCandidates(jobId);
-                break;
-        }
-    }
-
-    viewJob(jobId) {
-        console.log('Visualizing job:', jobId);
-        this.showModal('Detalhes da Vaga', `
+  viewJob(jobId) {
+    console.log("Visualizing job:", jobId);
+    this.showModal(
+      "Detalhes da Vaga",
+      `
             <p>Visualizando detalhes da vaga ID: ${jobId}</p>
             <p>Esta funcionalidade seria implementada para mostrar todos os detalhes da vaga.</p>
-        `);
-    }
+        `
+    );
+  }
 
-    editJob(jobId) {
-        console.log('Editing job:', jobId);
-        this.showModal('Editar Vaga', `
+  editJob(jobId) {
+    console.log("Editing job:", jobId);
+    this.showModal(
+      "Editar Vaga",
+      `
             <p>Editando vaga ID: ${jobId}</p>
             <p>Esta funcionalidade seria implementada para permitir edição da vaga.</p>
-        `);
-    }
+        `
+    );
+  }
 
-    deleteJob(jobId) {
-        if (confirm('Tem certeza que deseja excluir esta vaga?')) {
-            this.jobs = this.jobs.filter(job => job.id !== parseInt(jobId));
-            this.renderJobsTable();
-            this.showSuccessMessage('Vaga excluída com sucesso!');
-        }
+  deleteJob(jobId) {
+    if (confirm("Tem certeza que deseja excluir esta vaga?")) {
+      this.jobs = this.jobs.filter((job) => job.id !== parseInt(jobId));
+      this.renderJobsTable();
+      this.showSuccessMessage("Vaga excluída com sucesso!");
     }
+  }
 
-    viewCandidates(jobId) {
-        console.log('Viewing candidates for job:', jobId);
-        this.showModal('Candidatos', `
+  viewCandidates(jobId) {
+    console.log("Viewing candidates for job:", jobId);
+    this.showModal(
+      "Candidatos",
+      `
             <p>Candidatos para a vaga ID: ${jobId}</p>
             <div class="mt-4">
                 <h4 class="font-semibold mb-2">Lista de Candidatos:</h4>
@@ -113,19 +121,20 @@ class JobManager {
                     </li>
                 </ul>
             </div>
-        `);
-    }
+        `
+    );
+  }
 
-    renderJobsTable() {
-        const tbody = document.querySelector('#published-jobs tbody');
-        if (!tbody) return;
+  renderJobsTable() {
+    const tbody = document.querySelector("#published-jobs tbody");
+    if (!tbody) return;
 
-        tbody.innerHTML = '';
-        
-        this.jobs.forEach(job => {
-            const row = document.createElement('tr');
-            row.className = 'border-b border-gray-200 dark:border-gray-700';
-            row.innerHTML = `
+    tbody.innerHTML = "";
+
+    this.jobs.forEach((job) => {
+      const row = document.createElement("tr");
+      row.className = "border-b border-gray-200 dark:border-gray-700";
+      row.innerHTML = `
                 <td class="py-3 px-4 text-gray-900 dark:text-white">${job.title}</td>
                 <td class="py-3 px-4 text-gray-600 dark:text-gray-300">${job.location}</td>
                 <td class="py-3 px-4 text-gray-600 dark:text-gray-300">${job.type}</td>
@@ -139,17 +148,18 @@ class JobManager {
                     </div>
                 </td>
             `;
-            tbody.appendChild(row);
-        });
+      tbody.appendChild(row);
+    });
 
-        // Re-attach event listeners to new buttons
-        this.initializeJobsTable();
-    }
+    // Re-attach event listeners to new buttons
+    this.initializeJobsTable();
+  }
 
-    showModal(title, content) {
-        const modal = document.createElement('div');
-        modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
-        modal.innerHTML = `
+  showModal(title, content) {
+    const modal = document.createElement("div");
+    modal.className =
+      "fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50";
+    modal.innerHTML = `
             <div class="bg-white dark:bg-slate-800 rounded-lg p-6 max-w-md w-full mx-4">
                 <div class="flex justify-between items-center mb-4">
                     <h3 class="text-lg font-semibold text-gray-900 dark:text-white">${title}</h3>
@@ -167,112 +177,115 @@ class JobManager {
                 </div>
             </div>
         `;
-        
-        document.body.appendChild(modal);
-    }
 
-    showSuccessMessage(message) {
-        const notification = document.createElement('div');
-        notification.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
-        notification.innerHTML = `
+    document.body.appendChild(modal);
+  }
+
+  showSuccessMessage(message) {
+    const notification = document.createElement("div");
+    notification.className =
+      "fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50";
+    notification.innerHTML = `
             <div class="flex items-center gap-2">
                 <span>✓</span>
                 <span>${message}</span>
             </div>
         `;
-        
-        document.body.appendChild(notification);
-        
-        setTimeout(() => {
-            notification.remove();
-        }, 3000);
-    }
+
+    document.body.appendChild(notification);
+
+    setTimeout(() => {
+      notification.remove();
+    }, 3000);
+  }
 }
 
 /**
  * Form validation for new job form
  */
 function initializeJobFormValidation() {
-    const form = document.getElementById('new-job-form');
-    if (!form) return;
+  const form = document.getElementById("new-job-form");
+  if (!form) return;
 
-    const requiredFields = form.querySelectorAll('[required]');
-    requiredFields.forEach(field => {
-        field.addEventListener('blur', validateJobField);
-        field.addEventListener('input', clearJobValidationError);
-    });
+  const requiredFields = form.querySelectorAll("[required]");
+  requiredFields.forEach((field) => {
+    field.addEventListener("blur", validateJobField);
+    field.addEventListener("input", clearJobValidationError);
+  });
 }
 
 /**
  * Validate job form field
  */
 function validateJobField(event) {
-    const field = event.target;
-    const value = field.value.trim();
-    
-    clearJobValidationError({ target: field });
-    
-    if (field.hasAttribute('required') && !value) {
-        showJobFieldError(field, 'Este campo é obrigatório');
-        return false;
+  const field = event.target;
+  const value = field.value.trim();
+
+  clearJobValidationError({ target: field });
+
+  if (field.hasAttribute("required") && !value) {
+    showJobFieldError(field, "Este campo é obrigatório");
+    return false;
+  }
+
+  // Salary validation
+  if (field.name === "job-salary" && value) {
+    const salaryValue = parseFloat(
+      value.replace(/[^\d,]/g, "").replace(",", ".")
+    );
+    if (isNaN(salaryValue) || salaryValue <= 0) {
+      showJobFieldError(field, "Digite um salário válido");
+      return false;
     }
-    
-    // Salary validation
-    if (field.name === 'job-salary' && value) {
-        const salaryValue = parseFloat(value.replace(/[^\d,]/g, '').replace(',', '.'));
-        if (isNaN(salaryValue) || salaryValue <= 0) {
-            showJobFieldError(field, 'Digite um salário válido');
-            return false;
-        }
+  }
+
+  // Date validation
+  if (field.type === "date" && value) {
+    const selectedDate = new Date(value);
+    const today = new Date();
+
+    if (selectedDate <= today) {
+      showJobFieldError(field, "A data deve ser futura");
+      return false;
     }
-    
-    // Date validation
-    if (field.type === 'date' && value) {
-        const selectedDate = new Date(value);
-        const today = new Date();
-        
-        if (selectedDate <= today) {
-            showJobFieldError(field, 'A data deve ser futura');
-            return false;
-        }
-    }
-    
-    return true;
+  }
+
+  return true;
 }
 
 /**
  * Show job field validation error
  */
 function showJobFieldError(field, message) {
-    field.classList.add('border-red-500');
-    
-    const errorElement = document.createElement('div');
-    errorElement.className = 'text-red-500 text-sm mt-1 job-validation-error';
-    errorElement.textContent = message;
-    
-    field.parentNode.appendChild(errorElement);
+  field.classList.add("border-red-500");
+
+  const errorElement = document.createElement("div");
+  errorElement.className = "text-red-500 text-sm mt-1 job-validation-error";
+  errorElement.textContent = message;
+
+  field.parentNode.appendChild(errorElement);
 }
 
 /**
  * Clear job field validation error
  */
 function clearJobValidationError(event) {
-    const field = event.target;
-    field.classList.remove('border-red-500');
-    
-    const errorElement = field.parentNode.querySelector('.job-validation-error');
-    if (errorElement) {
-        errorElement.remove();
-    }
+  const field = event.target;
+  field.classList.remove("border-red-500");
+
+  const errorElement = field.parentNode.querySelector(".job-validation-error");
+  if (errorElement) {
+    errorElement.remove();
+  }
 }
 
 /**
  * Initialize empresa page specific functionality
  */
 function initializeEmpresaPage() {
-    new JobManager();
-    initializeJobFormValidation();
+  new JobManager();
+  initializeJobFormValidation();
 }
 
 // Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', initializeEmpresaPage);
+document.addEventListener("DOMContentLoaded", initializeEmpresaPage);
