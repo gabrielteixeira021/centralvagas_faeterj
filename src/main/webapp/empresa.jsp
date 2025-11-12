@@ -151,10 +151,15 @@
                                     <select
                                         class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-slate-700 dark:text-white">
                                         <option>Selecione a área</option>
-                                        <option>Tecnologia</option>
-                                        <option>Design</option>
-                                        <option>Marketing</option>
-                                        <option>Administração</option>
+                                        <option>Back-end</option>
+                                        <option>Front-end</option>
+                                        <option>Full Stack</option>
+                                        <option>Cybersecurity</option>
+                                        <option>Data Science</option>
+                                        <option>Mobile</option>
+                                        <option>DevOps</option>
+                                        <option>Blockchain</option>
+                                        <option>Game Dev</option>
                                     </select>
                                 </div>
                                 <div>
@@ -164,7 +169,9 @@
                                         class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-slate-700 dark:text-white">
                                         <option>Selecione o tipo</option>
                                         <option>Estágio</option>
-                                        <option>Emprego</option>
+                                        <option>Trainee</option>
+                                        <option>CLT</option>
+                                        <option>PJ</option>
                                     </select>
                                 </div>
                             </div>

@@ -204,7 +204,7 @@
                                         <td class="py-3 px-4 text-gray-600 dark:text-gray-300">Tech Solutions</td>
                                         <td class="py-3 px-4 text-gray-600 dark:text-gray-300">Desenvolvedor Java Jr
                                         </td>
-                                        <td class="py-3 px-4 text-gray-600 dark:text-gray-300">Tecnologia</td>
+                                        <td class="py-3 px-4 text-gray-600 dark:text-gray-300">Back-end</td>
                                         <td class="py-3 px-4"><span
                                                 class="inline-flex px-2 py-1 text-xs font-medium bg-green-100 text-green-800 rounded-full">Aberta</span>
                                         </td>
@@ -213,15 +213,16 @@
                                         class="border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-slate-700">
                                         <td class="py-3 px-4 text-gray-600 dark:text-gray-300">DataCorp</td>
                                         <td class="py-3 px-4 text-gray-600 dark:text-gray-300">Analista de Dados</td>
-                                        <td class="py-3 px-4 text-gray-600 dark:text-gray-300">Análise</td>
+                                        <td class="py-3 px-4 text-gray-600 dark:text-gray-300">Data Science</td>
                                         <td class="py-3 px-4"><span
                                                 class="inline-flex px-2 py-1 text-xs font-medium bg-green-100 text-green-800 rounded-full">Aberta</span>
                                         </td>
                                     </tr>
                                     <tr class="hover:bg-gray-50 dark:hover:bg-slate-700">
                                         <td class="py-3 px-4 text-gray-600 dark:text-gray-300">WebDesign Pro</td>
-                                        <td class="py-3 px-4 text-gray-600 dark:text-gray-300">Designer UX/UI</td>
-                                        <td class="py-3 px-4 text-gray-600 dark:text-gray-300">Design</td>
+                                        <td class="py-3 px-4 text-gray-600 dark:text-gray-300">Desenvolvedor Front-end
+                                            Jr</td>
+                                        <td class="py-3 px-4 text-gray-600 dark:text-gray-300">Front-end</td>
                                         <td class="py-3 px-4"><span
                                                 class="inline-flex px-2 py-1 text-xs font-medium bg-yellow-100 text-yellow-800 rounded-full">Poucas
                                                 vagas</span></td>
