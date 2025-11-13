@@ -13,9 +13,32 @@ public class DBUtil {
     public static Connection getConnection() throws SQLException {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            return DriverManager.getConnection(URL, USER, PASSWORD);
+            Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+            // IMPORTANTE: Desativar auto-commit para controlar transações manualmente
+            conn.setAutoCommit(false);
+            return conn;
         } catch (ClassNotFoundException e) {
             throw new SQLException("Driver MySQL não encontrado", e);
+        }
+    }
+
+    public static void commitConnection(Connection conn) {
+        if (conn != null) {
+            try {
+                conn.commit();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static void rollbackConnection(Connection conn) {
+        if (conn != null) {
+            try {
+                conn.rollback();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
