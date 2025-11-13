@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet(name = "AlunoServlet", urlPatterns = { "/aluno" })
+@WebServlet(name = "AlunoServlet", urlPatterns = {"/aluno"})
 public class AlunoServlet extends HttpServlet {
 
     @Override
@@ -68,8 +68,17 @@ public class AlunoServlet extends HttpServlet {
                 alunoDAO.inserir(aluno);
                 request.setAttribute("msgSucesso", "Cadastro realizado com sucesso!");
             }
-        } catch (NumberFormatException | SQLException e) {
-            request.setAttribute("msgErro", "Erro ao salvar: " + e.getMessage());
+        } catch (NumberFormatException e) {
+            request.setAttribute("msgErro", "Erro no formato de número: " + e.getMessage());
+            e.printStackTrace(); // Log para debugging
+        } catch (SQLException e) {
+            request.setAttribute("msgErro", "Erro no banco de dados: " + e.getMessage() + 
+                               " | SQL State: " + e.getSQLState() + 
+                               " | Error Code: " + e.getErrorCode());
+            e.printStackTrace(); // Log para debugging
+        } catch (Exception e) {
+            request.setAttribute("msgErro", "Erro inesperado: " + e.getMessage());
+            e.printStackTrace(); // Log para debugging
         }
         doGet(request, response); // Para atualizar a listagem após inserção/atualização
     }
