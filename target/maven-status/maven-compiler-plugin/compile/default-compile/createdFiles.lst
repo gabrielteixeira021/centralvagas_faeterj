@@ -1,4 +1,5 @@
 com\faeterj\centralvagas\util\MongoUtil.class
+com\faeterj\centralvagas\api\ExternalVagasResource.class
 com\faeterj\centralvagas\dao\EmpresaMongoDAO.class
 com\mycompany\ap6\resources\JakartaEE11Resource.class
 com\faeterj\centralvagas\servlets\AlunoServlet.class
