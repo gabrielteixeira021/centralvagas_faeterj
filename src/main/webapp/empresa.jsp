@@ -131,62 +131,69 @@
                     <!-- Create New Job -->
                     <div class="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm mb-6">
                         <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Cadastrar Nova Vaga</h3>
+                        <form id="new-job-form">
                         <div class="space-y-4">
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Nome da
                                     Empresa</label>
-                                <input type="text" placeholder="Digite o nome da empresa"
+                                <input type="text" name="empresa" id="empresa" placeholder="Digite o nome da empresa" required
                                     class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-slate-700 dark:text-white">
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Título da
                                     Vaga</label>
-                                <input type="text" placeholder="Ex: Desenvolvedor Java Jr"
+                                <input type="text" name="titulo" id="titulo" placeholder="Ex: Desenvolvedor Java Jr" required
                                     class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-slate-700 dark:text-white">
                             </div>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <label
                                         class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Área</label>
-                                    <select
+                                    <select name="area" id="area" required
                                         class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-slate-700 dark:text-white">
-                                        <option>Selecione a área</option>
-                                        <option>Back-end</option>
-                                        <option>Front-end</option>
-                                        <option>Full Stack</option>
-                                        <option>Cybersecurity</option>
-                                        <option>Data Science</option>
-                                        <option>Mobile</option>
-                                        <option>DevOps</option>
-                                        <option>Blockchain</option>
-                                        <option>Game Dev</option>
+                                        <option value="">Selecione a área</option>
+                                        <option value="Tecnologia">Tecnologia</option>
+                                        <option value="Back-end">Back-end</option>
+                                        <option value="Front-end">Front-end</option>
+                                        <option value="Full Stack">Full Stack</option>
+                                        <option value="Cybersecurity">Cybersecurity</option>
+                                        <option value="Data Science">Data Science</option>
+                                        <option value="Mobile">Mobile</option>
+                                        <option value="DevOps">DevOps</option>
+                                        <option value="Blockchain">Blockchain</option>
+                                        <option value="Game Dev">Game Dev</option>
                                     </select>
                                 </div>
                                 <div>
                                     <label
                                         class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Tipo</label>
-                                    <select
+                                    <select name="tipo" id="tipo" required
                                         class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-slate-700 dark:text-white">
-                                        <option>Selecione o tipo</option>
-                                        <option>Estágio</option>
-                                        <option>Trainee</option>
-                                        <option>CLT</option>
-                                        <option>PJ</option>
+                                        <option value="">Selecione o tipo</option>
+                                        <option value="Estágio">Estágio</option>
+                                        <option value="Trainee">Trainee</option>
+                                        <option value="CLT">CLT</option>
+                                        <option value="PJ">PJ</option>
                                     </select>
                                 </div>
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Descrição
                                     da Vaga</label>
-                                <textarea placeholder="Descreva as responsabilidades, requisitos e benefícios..."
-                                    rows="4"
+                                <textarea name="descricao" id="descricao" placeholder="Descreva as responsabilidades, requisitos e benefícios..."
+                                    rows="4" required
                                     class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-slate-700 dark:text-white resize-vertical"></textarea>
                             </div>
-                            <button
+                            <input type="hidden" name="localizacao" id="localizacao" value="Rio de Janeiro">
+                            <input type="hidden" name="salario" id="salario" value="A combinar">
+                            <input type="hidden" name="requisitos" id="requisitos" value="">
+                            <input type="hidden" name="beneficios" id="beneficios" value="">
+                            <button type="submit"
                                 class="w-full md:w-auto px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium">
                                 Publicar Vaga
                             </button>
                         </div>
+                        </form>
                     </div>
 
                     <!-- Published Jobs -->
@@ -297,6 +304,7 @@
         <script src="assets/js/components/MobileHeader.js"></script>
         <script src="assets/js/components/BottomNavigationBar.js"></script>
         <script src="assets/js/common.js"></script>
+        <script src="assets/js/api.js"></script>
         <script src="assets/js/empresa.js"></script>
         </main>
         </div>

@@ -128,6 +128,8 @@
                             oportunidades</p>
                     </div>
 
+                    <!-- Student Form -->
+                    <form id="student-form">
                     <!-- Personal Info -->
                     <div class="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm mb-6">
                         <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">Informações Pessoais</h3>
@@ -135,20 +137,20 @@
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Nome
                                     Completo</label>
-                                <input type="text" placeholder="Digite seu nome completo"
+                                <input type="text" name="nome" id="nome" placeholder="Digite seu nome completo" required
                                     class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-slate-700 dark:text-white">
                             </div>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <label
                                         class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">E-mail</label>
-                                    <input type="email" placeholder="seu@email.com"
+                                    <input type="email" name="email" id="email" placeholder="seu@email.com" required
                                         class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-slate-700 dark:text-white">
                                 </div>
                                 <div>
                                     <label
                                         class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Telefone</label>
-                                    <input type="tel" placeholder="(21) 99999-9999"
+                                    <input type="tel" name="telefone" id="telefone" placeholder="(21) 99999-9999" required
                                         class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-slate-700 dark:text-white">
                                 </div>
                             </div>
@@ -162,40 +164,40 @@
                             <div>
                                 <label
                                     class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Curso</label>
-                                <select
+                                <select name="curso" id="curso" required
                                     class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-slate-700 dark:text-white">
-                                    <option>Selecione seu curso</option>
-                                    <option>Análise e Desenvolvimento de Sistemas</option>
-                                    <option>Ciência da Computação</option>
-                                    <option>Engenharia de Software</option>
-                                    <option>Sistemas de Informação</option>
-                                    <option>Redes de Computadores</option>
+                                    <option value="">Selecione seu curso</option>
+                                    <option value="ADS">Análise e Desenvolvimento de Sistemas</option>
+                                    <option value="CC">Ciência da Computação</option>
+                                    <option value="ES">Engenharia de Software</option>
+                                    <option value="SI">Sistemas de Informação</option>
+                                    <option value="RC">Redes de Computadores</option>
                                 </select>
                             </div>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <label
                                         class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Período</label>
-                                    <select
+                                    <select name="periodo" id="periodo" required
                                         class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-slate-700 dark:text-white">
-                                        <option>Selecione</option>
-                                        <option>1º Período</option>
-                                        <option>2º Período</option>
-                                        <option>3º Período</option>
-                                        <option>4º Período</option>
-                                        <option>5º Período</option>
-                                        <option>6º Período</option>
+                                        <option value="">Selecione</option>
+                                        <option value="1º">1º Período</option>
+                                        <option value="2º">2º Período</option>
+                                        <option value="3º">3º Período</option>
+                                        <option value="4º">4º Período</option>
+                                        <option value="5º">5º Período</option>
+                                        <option value="6º">6º Período</option>
                                     </select>
                                 </div>
                                 <div>
                                     <label
                                         class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Turno</label>
-                                    <select
+                                    <select name="turno" id="turno" required
                                         class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-slate-700 dark:text-white">
-                                        <option>Selecione</option>
-                                        <option>Manhã</option>
-                                        <option>Tarde</option>
-                                        <option>Noite</option>
+                                        <option value="">Selecione</option>
+                                        <option value="Manhã">Manhã</option>
+                                        <option value="Tarde">Tarde</option>
+                                        <option value="Noite">Noite</option>
                                     </select>
                                 </div>
                             </div>
@@ -211,28 +213,29 @@
                                 <label
                                     class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Competências
                                     Técnicas</label>
-                                <textarea placeholder="Ex: Java, Python, SQL, Git, HTML/CSS..." rows="4"
+                                <textarea name="competencias" id="competencias" placeholder="Ex: Java, Python, SQL, Git, HTML/CSS..." rows="4" required
                                     class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-slate-700 dark:text-white resize-vertical"></textarea>
                             </div>
                             <div>
                                 <label
                                     class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Experiência
                                     Profissional</label>
-                                <textarea placeholder="Descreva suas experiências anteriores..." rows="4"
+                                <textarea name="experiencia" id="experiencia" placeholder="Descreva suas experiências anteriores..." rows="4" required
                                     class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-slate-700 dark:text-white resize-vertical"></textarea>
                             </div>
                             <div class="flex flex-col md:flex-row gap-3">
-                                <button
+                                <button type="submit"
                                     class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium">
                                     Salvar Cadastro
                                 </button>
-                                <button
+                                <button type="button" onclick="document.getElementById('student-form').reset()"
                                     class="px-6 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors font-medium">
                                     Cancelar
                                 </button>
                             </div>
                         </div>
                     </div>
+                    </form>
 
                     <!-- Gamification -->
                     <div class="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm">
@@ -269,6 +272,7 @@
         <script src="assets/js/components/MobileHeader.js"></script>
         <script src="assets/js/components/BottomNavigationBar.js"></script>
         <script src="assets/js/common.js"></script>
+        <script src="assets/js/api.js"></script>
         <script src="assets/js/aluno.js"></script>
     </body>
 

@@ -253,11 +253,71 @@ function initializeJobSearch() {
 }
 
 /**
+ * Load and display available jobs
+ */
+async function loadAvailableJobs() {
+  try {
+    const response = await VagaAPI.getActive();
+    if (response.success && response.data) {
+      renderJobsTable(response.data);
+    }
+  } catch (error) {
+    console.error('Error loading jobs:', error);
+    showNotification('Erro ao carregar vagas disponíveis', 'error');
+  }
+}
+
+/**
+ * Render jobs table
+ */
+function renderJobsTable(jobs) {
+  const tbody = document.querySelector("table tbody");
+  if (!tbody) return;
+
+  // Clear existing rows
+  tbody.innerHTML = "";
+
+  if (jobs.length === 0) {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td colspan="5" class="py-4 px-4 text-center text-gray-500 dark:text-gray-400">
+        Nenhuma vaga disponível no momento
+      </td>
+    `;
+    tbody.appendChild(row);
+    return;
+  }
+
+  jobs.forEach((job) => {
+    const row = document.createElement("tr");
+    row.className = "border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-slate-700";
+    
+    row.innerHTML = `
+      <td class="py-3 px-4 text-gray-600 dark:text-gray-300">${job.empresa || 'N/A'}</td>
+      <td class="py-3 px-4 text-gray-600 dark:text-gray-300">${job.titulo || 'N/A'}</td>
+      <td class="py-3 px-4 text-gray-600 dark:text-gray-300">${job.area || 'N/A'}</td>
+      <td class="py-3 px-4 text-gray-600 dark:text-gray-300">${job.tipo || 'N/A'}</td>
+      <td class="py-3 px-4">
+        <button class="candidate-btn px-3 py-1 bg-blue-600 text-white rounded text-sm hover:bg-blue-700 transition-colors" 
+                data-job-id="${job.id}" data-job="${job.titulo}">
+          Candidatar
+        </button>
+      </td>
+    `;
+    tbody.appendChild(row);
+  });
+
+  // Re-attach event listeners
+  initializeJobSearch();
+}
+
+/**
  * Initialize vagas page specific functionality
  */
 function initializeVagasPage() {
   initializeElementSDK();
   initializeJobSearch();
+  loadAvailableJobs();
 }
 
 // Initialize when DOM is loaded

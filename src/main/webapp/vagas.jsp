@@ -292,6 +292,7 @@
         <script src="assets/js/components/MobileHeader.js"></script>
         <script src="assets/js/components/BottomNavigationBar.js"></script>
         <script src="assets/js/common.js"></script>
+        <script src="assets/js/api.js"></script>
         <script src="assets/js/vagas.js"></script>
     </body>
 

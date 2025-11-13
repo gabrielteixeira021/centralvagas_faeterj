@@ -9,13 +9,26 @@ class JobManager {
   constructor() {
     this.jobs = [];
     this.initializeJobForm();
-    this.initializeJobsTable();
+    this.loadJobs();
   }
 
   initializeJobForm() {
     const form = document.getElementById("new-job-form");
     if (form) {
       form.addEventListener("submit", (e) => this.handleJobSubmission(e));
+    }
+  }
+
+  async loadJobs() {
+    try {
+      const response = await VagaAPI.getAll();
+      if (response.success && response.data) {
+        this.jobs = response.data;
+        this.renderJobsTable();
+      }
+    } catch (error) {
+      console.error('Error loading jobs:', error);
+      showNotification('Erro ao carregar vagas', 'error');
     }
   }
 
@@ -26,25 +39,46 @@ class JobManager {
     });
   }
 
-  handleJobSubmission(event) {
+  async handleJobSubmission(event) {
     event.preventDefault();
 
-    const formData = new FormData(event.target);
-    const jobData = {
-      id: Date.now(),
-      title: formData.get("job-title"),
-      description: formData.get("job-description"),
-      requirements: formData.get("job-requirements"),
-      salary: formData.get("job-salary"),
-      location: formData.get("job-location"),
-      type: formData.get("job-type"),
-      deadline: formData.get("application-deadline"),
-      createdAt: new Date().toLocaleDateString("pt-BR"),
-    };
+    const submitButton = event.target.querySelector('button[type="submit"]');
+    const originalText = submitButton.textContent;
 
-    this.addJob(jobData);
-    this.showSuccessMessage("Vaga publicada com sucesso!");
-    event.target.reset();
+    try {
+      submitButton.disabled = true;
+      submitButton.textContent = 'Publicando...';
+
+      const formData = new FormData(event.target);
+      const jobData = {
+        titulo: formData.get("titulo"),
+        descricao: formData.get("descricao"),
+        empresa: formData.get("empresa"),
+        empresaId: "temp-empresa-id", // TODO: Get from logged in empresa
+        area: formData.get("area"),
+        requisitos: formData.get("requisitos") || "A definir",
+        beneficios: formData.get("beneficios") || "A definir",
+        tipo: formData.get("tipo"),
+        localizacao: formData.get("localizacao"),
+        salario: formData.get("salario")
+      };
+
+      const response = await VagaAPI.create(jobData);
+
+      if (response.success) {
+        showNotification('Vaga publicada com sucesso!', 'success');
+        event.target.reset();
+        await this.loadJobs(); // Reload jobs list
+      } else {
+        showNotification(response.message || 'Erro ao publicar vaga', 'error');
+      }
+    } catch (error) {
+      console.error('Error submitting job:', error);
+      showNotification('Erro ao publicar vaga. Por favor, tente novamente.', 'error');
+    } finally {
+      submitButton.disabled = false;
+      submitButton.textContent = originalText;
+    }
   }
 
   addJob(jobData) {
@@ -94,11 +128,20 @@ class JobManager {
     );
   }
 
-  deleteJob(jobId) {
+  async deleteJob(jobId) {
     if (confirm("Tem certeza que deseja excluir esta vaga?")) {
-      this.jobs = this.jobs.filter((job) => job.id !== parseInt(jobId));
-      this.renderJobsTable();
-      this.showSuccessMessage("Vaga excluída com sucesso!");
+      try {
+        const response = await VagaAPI.delete(jobId);
+        if (response.success) {
+          showNotification('Vaga excluída com sucesso!', 'success');
+          await this.loadJobs(); // Reload jobs list
+        } else {
+          showNotification(response.message || 'Erro ao excluir vaga', 'error');
+        }
+      } catch (error) {
+        console.error('Error deleting job:', error);
+        showNotification('Erro ao excluir vaga. Por favor, tente novamente.', 'error');
+      }
     }
   }
 
@@ -126,28 +169,43 @@ class JobManager {
   }
 
   renderJobsTable() {
-    const tbody = document.querySelector("#published-jobs tbody");
+    const tbody = document.querySelector("table tbody");
     if (!tbody) return;
 
+    // Clear existing rows except the header
     tbody.innerHTML = "";
+
+    if (this.jobs.length === 0) {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td colspan="5" class="py-4 px-4 text-center text-gray-500 dark:text-gray-400">
+          Nenhuma vaga publicada ainda
+        </td>
+      `;
+      tbody.appendChild(row);
+      return;
+    }
 
     this.jobs.forEach((job) => {
       const row = document.createElement("tr");
-      row.className = "border-b border-gray-200 dark:border-gray-700";
+      row.className = "border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-slate-700";
+      const status = job.ativa ? 'Ativa' : 'Inativa';
+      const statusClass = job.ativa ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800';
+      
       row.innerHTML = `
-                <td class="py-3 px-4 text-gray-900 dark:text-white">${job.title}</td>
-                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">${job.location}</td>
-                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">${job.type}</td>
-                <td class="py-3 px-4 text-gray-600 dark:text-gray-300">${job.createdAt}</td>
-                <td class="py-3 px-4">
-                    <div class="flex space-x-2">
-                        <button data-action="view" data-job-id="${job.id}" class="job-action-btn text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200">Ver</button>
-                        <button data-action="edit" data-job-id="${job.id}" class="job-action-btn text-green-600 dark:text-green-400 hover:text-green-800 dark:hover:text-green-200">Editar</button>
-                        <button data-action="delete" data-job-id="${job.id}" class="job-action-btn text-red-600 dark:text-red-400 hover:text-red-800 dark:hover:text-red-200">Excluir</button>
-                        <button data-action="candidates" data-job-id="${job.id}" class="job-action-btn text-purple-600 dark:text-purple-400 hover:text-purple-800 dark:hover:text-purple-200">Candidatos</button>
-                    </div>
-                </td>
-            `;
+        <td class="py-3 px-4 text-gray-600 dark:text-gray-300">${job.titulo || 'N/A'}</td>
+        <td class="py-3 px-4 text-gray-600 dark:text-gray-300">${job.area || 'N/A'}</td>
+        <td class="py-3 px-4 text-gray-600 dark:text-gray-300">0</td>
+        <td class="py-3 px-4">
+          <span class="inline-flex px-2 py-1 text-xs font-medium ${statusClass} rounded-full">${status}</span>
+        </td>
+        <td class="py-3 px-4">
+          <div class="flex gap-2">
+            <button data-action="view" data-job-id="${job.id}" class="job-action-btn px-3 py-1 bg-blue-600 text-white rounded text-sm hover:bg-blue-700 transition-colors">Ver</button>
+            <button data-action="delete" data-job-id="${job.id}" class="job-action-btn px-3 py-1 bg-red-600 text-white rounded text-sm hover:bg-red-700 transition-colors">Excluir</button>
+          </div>
+        </td>
+      `;
       tbody.appendChild(row);
     });
 

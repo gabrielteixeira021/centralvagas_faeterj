@@ -81,13 +81,57 @@ function initializeStudentForm() {
   initializeSkillsSection(gamification);
 
   // Form submission
-  form.addEventListener("submit", function (e) {
+  form.addEventListener("submit", async function (e) {
     e.preventDefault();
     if (validateForm()) {
-      gamification.addPoints(50);
-      showSuccessMessage("Cadastro realizado com sucesso!");
+      await submitStudentForm(form, gamification);
     }
   });
+}
+
+/**
+ * Submit student form to API
+ */
+async function submitStudentForm(form, gamification) {
+  const submitButton = form.querySelector('button[type="submit"]');
+  const originalText = submitButton.textContent;
+  
+  try {
+    // Disable submit button
+    submitButton.disabled = true;
+    submitButton.textContent = 'Salvando...';
+    
+    // Collect form data
+    const formData = new FormData(form);
+    const alunoData = {
+      nome: formData.get('nome'),
+      email: formData.get('email'),
+      telefone: formData.get('telefone'),
+      curso: formData.get('curso'),
+      periodo: formData.get('periodo'),
+      turno: formData.get('turno'),
+      competencias: formData.get('competencias'),
+      experiencia: formData.get('experiencia')
+    };
+    
+    // Call API
+    const response = await AlunoAPI.create(alunoData);
+    
+    if (response.success) {
+      gamification.addPoints(50);
+      showNotification('Cadastro realizado com sucesso!', 'success');
+      form.reset();
+    } else {
+      showNotification(response.message || 'Erro ao salvar cadastro', 'error');
+    }
+  } catch (error) {
+    console.error('Error submitting form:', error);
+    showNotification('Erro ao salvar cadastro. Por favor, tente novamente.', 'error');
+  } finally {
+    // Re-enable submit button
+    submitButton.disabled = false;
+    submitButton.textContent = originalText;
+  }
 }
 
 /**
