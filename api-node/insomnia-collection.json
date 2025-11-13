@@ -1,0 +1,303 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2025-11-13T00:30:00.000Z",
+  "__export_source": "insomnia.desktop.app:v2023.5.8",
+  "resources": [
+    {
+      "_id": "req_health_check",
+      "parentId": "fld_system",
+      "modified": 1699905000000,
+      "created": 1699905000000,
+      "url": "{{ _.base_url }}/api/health",
+      "name": "📊 Health Check",
+      "description": "Verifica se a API está funcionando",
+      "method": "GET",
+      "body": {},
+      "_type": "request"
+    },
+    {
+      "_id": "req_api_info",
+      "parentId": "fld_system",
+      "modified": 1699905100000,
+      "created": 1699905100000,
+      "url": "{{ _.base_url }}/api",
+      "name": "📝 Info da API",
+      "description": "Informações gerais da API",
+      "method": "GET",
+      "body": {},
+      "_type": "request"
+    },
+    {
+      "_id": "req_alunos_list",
+      "parentId": "fld_alunos",
+      "modified": 1699906000000,
+      "created": 1699906000000,
+      "url": "{{ _.base_url }}/api/alunos",
+      "name": "📋 Listar Alunos",
+      "description": "Lista todos os alunos com paginação e filtros",
+      "method": "GET",
+      "body": {},
+      "parameters": [
+        {"name": "page", "value": "1"},
+        {"name": "limit", "value": "10"},
+        {"name": "curso", "value": "", "disabled": true},
+        {"name": "turno", "value": "", "disabled": true}
+      ],
+      "_type": "request"
+    },
+    {
+      "_id": "req_alunos_create",
+      "parentId": "fld_alunos",
+      "modified": 1699906100000,
+      "created": 1699906100000,
+      "url": "{{ _.base_url }}/api/alunos",
+      "name": "➕ Criar Aluno",
+      "description": "Cria novo aluno",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nome\": \"João da Silva Node\",\n  \"email\": \"joao.node@faeterj.edu.br\",\n  \"telefone\": \"(21) 99999-0001\",\n  \"curso\": \"Análise e Desenvolvimento de Sistemas\",\n  \"periodo\": \"4º período\",\n  \"turno\": \"Noite\",\n  \"competencias\": \"JavaScript, Node.js, Express, MongoDB, React\",\n  \"experiencia\": \"Estudante com foco em desenvolvimento full-stack moderno\"\n}"
+      },
+      "headers": [{"name": "Content-Type", "value": "application/json"}],
+      "_type": "request"
+    },
+    {
+      "_id": "req_alunos_get_by_id",
+      "parentId": "fld_alunos",
+      "modified": 1699906200000,
+      "created": 1699906200000,
+      "url": "{{ _.base_url }}/api/alunos/{{ _.aluno_id }}",
+      "name": "🔍 Buscar Aluno por ID",
+      "method": "GET",
+      "body": {},
+      "_type": "request"
+    },
+    {
+      "_id": "req_alunos_update",
+      "parentId": "fld_alunos",
+      "modified": 1699906300000,
+      "created": 1699906300000,
+      "url": "{{ _.base_url }}/api/alunos/{{ _.aluno_id }}",
+      "name": "🔄 Atualizar Aluno",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nome\": \"João da Silva Node ATUALIZADO\",\n  \"telefone\": \"(21) 99999-0002\",\n  \"competencias\": \"JavaScript, Node.js, Express, MongoDB, React, Vue.js\"\n}"
+      },
+      "headers": [{"name": "Content-Type", "value": "application/json"}],
+      "_type": "request"
+    },
+    {
+      "_id": "req_alunos_delete",
+      "parentId": "fld_alunos",
+      "modified": 1699906400000,
+      "created": 1699906400000,
+      "url": "{{ _.base_url }}/api/alunos/{{ _.aluno_id }}",
+      "name": "❌ Deletar Aluno",
+      "method": "DELETE",
+      "body": {},
+      "_type": "request"
+    },
+    {
+      "_id": "req_alunos_search",
+      "parentId": "fld_alunos",
+      "modified": 1699906500000,
+      "created": 1699906500000,
+      "url": "{{ _.base_url }}/api/alunos/search/javascript",
+      "name": "🔎 Buscar Alunos",
+      "description": "Busca alunos por termo",
+      "method": "GET",
+      "body": {},
+      "_type": "request"
+    },
+    {
+      "_id": "req_empresas_list",
+      "parentId": "fld_empresas",
+      "modified": 1699907000000,
+      "created": 1699907000000,
+      "url": "{{ _.base_url }}/api/empresas",
+      "name": "📋 Listar Empresas",
+      "method": "GET",
+      "body": {},
+      "parameters": [
+        {"name": "setor", "value": "", "disabled": true},
+        {"name": "ativa", "value": "true", "disabled": true}
+      ],
+      "_type": "request"
+    },
+    {
+      "_id": "req_empresas_create",
+      "parentId": "fld_empresas",
+      "modified": 1699907100000,
+      "created": 1699907100000,
+      "url": "{{ _.base_url }}/api/empresas",
+      "name": "➕ Criar Empresa",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nome\": \"TechNode Solutions\",\n  \"cnpj\": \"12.345.678/0001-90\",\n  \"email\": \"contato@technode.com.br\",\n  \"telefone\": \"(21) 3333-4444\",\n  \"endereco\": \"Av. Node.js, 123 - Centro - Rio de Janeiro/RJ\",\n  \"setor\": \"Tecnologia\",\n  \"descricao\": \"Empresa especializada em soluções Node.js e APIs modernas\",\n  \"senha\": \"senha123456\"\n}"
+      },
+      "headers": [{"name": "Content-Type", "value": "application/json"}],
+      "_type": "request"
+    },
+    {
+      "_id": "req_empresas_setores",
+      "parentId": "fld_empresas",
+      "modified": 1699907200000,
+      "created": 1699907200000,
+      "url": "{{ _.base_url }}/api/empresas/setores",
+      "name": "🏢 Listar Setores",
+      "method": "GET",
+      "body": {},
+      "_type": "request"
+    },
+    {
+      "_id": "req_vagas_list",
+      "parentId": "fld_vagas",
+      "modified": 1699908000000,
+      "created": 1699908000000,
+      "url": "{{ _.base_url }}/api/vagas",
+      "name": "📋 Listar Vagas",
+      "method": "GET",
+      "body": {},
+      "parameters": [
+        {"name": "ativa", "value": "true", "disabled": true},
+        {"name": "area", "value": "", "disabled": true},
+        {"name": "tipo", "value": "", "disabled": true},
+        {"name": "q", "value": "", "disabled": true}
+      ],
+      "_type": "request"
+    },
+    {
+      "_id": "req_vagas_ativas",
+      "parentId": "fld_vagas",
+      "modified": 1699908100000,
+      "created": 1699908100000,
+      "url": "{{ _.base_url }}/api/vagas/ativas",
+      "name": "✅ Vagas Ativas",
+      "method": "GET",
+      "body": {},
+      "_type": "request"
+    },
+    {
+      "_id": "req_vagas_create",
+      "parentId": "fld_vagas",
+      "modified": 1699908200000,
+      "created": 1699908200000,
+      "url": "{{ _.base_url }}/api/vagas",
+      "name": "➕ Criar Vaga",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"titulo\": \"Desenvolvedor Node.js Junior\",\n  \"descricao\": \"Vaga para desenvolvimento de APIs REST com Node.js, Express e MongoDB. Oportunidade para trabalhar em projetos inovadores.\",\n  \"empresa\": \"TechNode Solutions\",\n  \"empresaId\": \"{{ _.empresa_id }}\",\n  \"area\": \"Tecnologia da Informação\",\n  \"requisitos\": \"JavaScript, Node.js, Express, MongoDB, Git\",\n  \"beneficios\": \"VT, VR, Plano de Saúde, Home Office, Treinamentos\",\n  \"tipo\": \"Estágio\",\n  \"localizacao\": \"Rio de Janeiro/RJ - Híbrido\",\n  \"salario\": 2500.00\n}"
+      },
+      "headers": [{"name": "Content-Type", "value": "application/json"}],
+      "_type": "request"
+    },
+    {
+      "_id": "req_candidaturas_create",
+      "parentId": "fld_candidaturas",
+      "modified": 1699909000000,
+      "created": 1699909000000,
+      "url": "{{ _.base_url }}/api/candidaturas",
+      "name": "➕ Criar Candidatura",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"alunoId\": \"{{ _.aluno_id }}\",\n  \"vagaId\": \"{{ _.vaga_id }}\",\n  \"observacoes\": \"Tenho muito interesse na vaga e já trabalho com Node.js em projetos pessoais\"\n}"
+      },
+      "headers": [{"name": "Content-Type", "value": "application/json"}],
+      "_type": "request"
+    },
+    {
+      "_id": "req_candidaturas_status",
+      "parentId": "fld_candidaturas",
+      "modified": 1699909100000,
+      "created": 1699909100000,
+      "url": "{{ _.base_url }}/api/candidaturas/{{ _.candidatura_id }}/status",
+      "name": "🔄 Atualizar Status",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"status\": \"Aprovado\",\n  \"feedbackEmpresa\": \"Candidato tem o perfil ideal para a vaga. Parabéns!\"\n}"
+      },
+      "headers": [{"name": "Content-Type", "value": "application/json"}],
+      "_type": "request"
+    },
+    {
+      "_id": "req_candidaturas_stats",
+      "parentId": "fld_candidaturas",
+      "modified": 1699909200000,
+      "created": 1699909200000,
+      "url": "{{ _.base_url }}/api/candidaturas/estatisticas/geral",
+      "name": "📊 Estatísticas",
+      "method": "GET",
+      "body": {},
+      "_type": "request"
+    },
+    {
+      "_id": "env_central_vagas_node",
+      "parentId": "wrk_central_vagas_node",
+      "modified": 1699904000000,
+      "created": 1699904000000,
+      "name": "Base Environment",
+      "data": {
+        "base_url": "http://localhost:3000",
+        "aluno_id": "",
+        "empresa_id": "",
+        "vaga_id": "",
+        "candidatura_id": ""
+      },
+      "dataPropertyOrder": null,
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1699904000000,
+      "_type": "environment"
+    },
+    {
+      "_id": "fld_system",
+      "parentId": "wrk_central_vagas_node",
+      "name": "🔧 Sistema",
+      "description": "Endpoints de sistema e informações",
+      "_type": "request_group"
+    },
+    {
+      "_id": "fld_alunos",
+      "parentId": "wrk_central_vagas_node",
+      "name": "👥 Alunos",
+      "description": "CRUD completo de alunos",
+      "_type": "request_group"
+    },
+    {
+      "_id": "fld_empresas",
+      "parentId": "wrk_central_vagas_node",
+      "name": "🏢 Empresas",
+      "description": "CRUD completo de empresas",
+      "_type": "request_group"
+    },
+    {
+      "_id": "fld_vagas",
+      "parentId": "wrk_central_vagas_node",
+      "name": "💼 Vagas",
+      "description": "CRUD completo de vagas com filtros avançados",
+      "_type": "request_group"
+    },
+    {
+      "_id": "fld_candidaturas",
+      "parentId": "wrk_central_vagas_node",
+      "name": "📄 Candidaturas",
+      "description": "Gerenciamento completo de candidaturas",
+      "_type": "request_group"
+    },
+    {
+      "_id": "wrk_central_vagas_node",
+      "parentId": null,
+      "modified": 1699903900000,
+      "created": 1699903900000,
+      "name": "🚀 Central Vagas Node.js API",
+      "description": "API REST completa com Node.js + Express + MongoDB\n\nRecursos:\n✅ CRUD completo para todas entidades\n✅ Autenticação e validação\n✅ Filtros e paginação avançados\n✅ Relacionamentos entre entidades\n✅ Tratamento robusto de erros\n✅ Performance otimizada",
+      "_type": "workspace"
+    }
+  ]
+}
