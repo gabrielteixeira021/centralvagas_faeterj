@@ -3,6 +3,75 @@
  */
 
 /**
+ * Fetch and update statistics from APIs
+ */
+async function loadStatistics() {
+  try {
+    // Fetch all data in parallel
+    const [alunosResponse, empresasResponse, vagasResponse] = await Promise.all([
+      fetch('/AP6/api/alunos'),
+      fetch('/AP6/api/empresas'),
+      fetch('/AP6/api/vagas')
+    ]);
+
+    // Check if responses are OK
+    if (!alunosResponse.ok || !empresasResponse.ok || !vagasResponse.ok) {
+      throw new Error('Erro ao buscar dados das APIs');
+    }
+
+    // Parse responses
+    const alunosData = await alunosResponse.json();
+    const empresasData = await empresasResponse.json();
+    const vagasData = await vagasResponse.json();
+
+    console.log('Dados recebidos:', { alunosData, empresasData, vagasData });
+
+    // Update alunos count
+    const alunosCount = document.getElementById('alunos-count');
+    if (alunosCount) {
+      const totalAlunos = alunosData.total || (alunosData.alunos ? alunosData.alunos.length : 0);
+      alunosCount.textContent = totalAlunos;
+    }
+
+    // Update empresas count
+    const empresasCount = document.getElementById('empresas-count');
+    if (empresasCount) {
+      const totalEmpresas = empresasData.total || (empresasData.empresas ? empresasData.empresas.length : 0);
+      empresasCount.textContent = totalEmpresas;
+    }
+
+    // Update vagas count (only active ones)
+    const vagasCount = document.getElementById('vagas-count');
+    if (vagasCount) {
+      if (vagasData.vagas && Array.isArray(vagasData.vagas)) {
+        const vagasAtivas = vagasData.vagas.filter(vaga => vaga.ativa === true).length;
+        vagasCount.textContent = vagasAtivas;
+      } else {
+        vagasCount.textContent = vagasData.total || 0;
+      }
+    }
+
+    // Update contratacoes count (placeholder - será implementado futuramente)
+    const contratacoesCount = document.getElementById('contratacoes-count');
+    if (contratacoesCount) {
+      contratacoesCount.textContent = '0';
+    }
+
+  } catch (error) {
+    console.error('Erro ao carregar estatísticas:', error);
+    
+    // Set default values on error
+    const elements = ['alunos-count', 'empresas-count', 'vagas-count', 'contratacoes-count'];
+    elements.forEach(id => {
+      const element = document.getElementById(id);
+      if (element) {
+        element.textContent = '0';
+      }
+    });
+  }
+}
+
+/**
  * Element SDK Configuration and Functions for Index Page
  */
 function applyCustomization(config) {
@@ -231,6 +300,9 @@ function initializeElementSDK() {
  * Initialize index page specific functionality
  */
 function initializeIndexPage() {
+  // Load real statistics from APIs
+  loadStatistics();
+
   initializeElementSDK();
 
   // Animate counters when page loads

@@ -134,25 +134,33 @@
                             <h4
                                 class="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">
                                 Vagas Ativas</h4>
-                            <p class="text-3xl font-bold text-gray-900 dark:text-white">127</p>
+                            <p id="vagas-count" class="text-3xl font-bold text-gray-900 dark:text-white">
+                                <span class="inline-block animate-pulse">...</span>
+                            </p>
                         </div>
                         <div class="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm border-l-4 border-green-500">
                             <h4
                                 class="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">
                                 Empresas Parceiras</h4>
-                            <p class="text-3xl font-bold text-gray-900 dark:text-white">45</p>
+                            <p id="empresas-count" class="text-3xl font-bold text-gray-900 dark:text-white">
+                                <span class="inline-block animate-pulse">...</span>
+                            </p>
                         </div>
                         <div class="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm border-l-4 border-purple-500">
                             <h4
                                 class="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">
                                 Alunos Cadastrados</h4>
-                            <p class="text-3xl font-bold text-gray-900 dark:text-white">892</p>
+                            <p id="alunos-count" class="text-3xl font-bold text-gray-900 dark:text-white">
+                                <span class="inline-block animate-pulse">...</span>
+                            </p>
                         </div>
                         <div class="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm border-l-4 border-orange-500">
                             <h4
                                 class="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">
                                 Contratações</h4>
-                            <p class="text-3xl font-bold text-gray-900 dark:text-white">234</p>
+                            <p id="contratacoes-count" class="text-3xl font-bold text-gray-900 dark:text-white">
+                                <span class="inline-block animate-pulse">...</span>
+                            </p>
                         </div>
                     </div><!-- About Card -->
                     <div class="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm mb-6">
