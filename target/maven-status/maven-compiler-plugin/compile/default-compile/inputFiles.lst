@@ -1,3 +1,4 @@
+C:\Users\gabriel\Desktop\Repositórios\Java-Workspace\4POA_AP6_AV2\src\main\java\com\faeterj\centralvagas\api\ApplicationConfig.java
 C:\Users\gabriel\Desktop\Repositórios\Java-Workspace\4POA_AP6_AV2\src\main\java\com\faeterj\centralvagas\dao\AlunoDAO.java
 C:\Users\gabriel\Desktop\Repositórios\Java-Workspace\4POA_AP6_AV2\src\main\java\com\faeterj\centralvagas\dao\CandidaturaDAO.java
 C:\Users\gabriel\Desktop\Repositórios\Java-Workspace\4POA_AP6_AV2\src\main\java\com\faeterj\centralvagas\dao\EmpresaDAO.java
@@ -7,7 +8,9 @@ C:\Users\gabriel\Desktop\Repositórios\Java-Workspace\4POA_AP6_AV2\src\main\java
 C:\Users\gabriel\Desktop\Repositórios\Java-Workspace\4POA_AP6_AV2\src\main\java\com\faeterj\centralvagas\model\Empresa.java
 C:\Users\gabriel\Desktop\Repositórios\Java-Workspace\4POA_AP6_AV2\src\main\java\com\faeterj\centralvagas\model\Vaga.java
 C:\Users\gabriel\Desktop\Repositórios\Java-Workspace\4POA_AP6_AV2\src\main\java\com\faeterj\centralvagas\servlets\AlunoServlet.java
+C:\Users\gabriel\Desktop\Repositórios\Java-Workspace\4POA_AP6_AV2\src\main\java\com\faeterj\centralvagas\servlets\DebugDBServlet.java
 C:\Users\gabriel\Desktop\Repositórios\Java-Workspace\4POA_AP6_AV2\src\main\java\com\faeterj\centralvagas\servlets\EmpresaServlet.java
+C:\Users\gabriel\Desktop\Repositórios\Java-Workspace\4POA_AP6_AV2\src\main\java\com\faeterj\centralvagas\servlets\H2ConsoleServlet.java
 C:\Users\gabriel\Desktop\Repositórios\Java-Workspace\4POA_AP6_AV2\src\main\java\com\faeterj\centralvagas\servlets\TesteDatabaseServlet.java
 C:\Users\gabriel\Desktop\Repositórios\Java-Workspace\4POA_AP6_AV2\src\main\java\com\faeterj\centralvagas\servlets\VagasServlet.java
 C:\Users\gabriel\Desktop\Repositórios\Java-Workspace\4POA_AP6_AV2\src\main\java\com\faeterj\centralvagas\util\DBUtil.java

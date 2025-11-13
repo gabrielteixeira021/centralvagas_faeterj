@@ -8,6 +8,14 @@
         <servlet-name>AlunoServlet</servlet-name>
         <servlet-class>com.faeterj.centralvagas.servlets.AlunoServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>H2ConsoleServlet</servlet-name>
+        <servlet-class>com.faeterj.centralvagas.servlets.H2ConsoleServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DebugDBServlet</servlet-name>
+        <servlet-class>com.faeterj.centralvagas.servlets.DebugDBServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>test</servlet-name>
         <url-pattern>/test</url-pattern>
@@ -15,6 +23,14 @@
     <servlet-mapping>
         <servlet-name>AlunoServlet</servlet-name>
         <url-pattern>/aluno</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>H2ConsoleServlet</servlet-name>
+        <url-pattern>/admin/h2console</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DebugDBServlet</servlet-name>
+        <url-pattern>/debug-db</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
