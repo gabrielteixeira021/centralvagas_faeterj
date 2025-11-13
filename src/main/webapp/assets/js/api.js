@@ -44,14 +44,22 @@ async function apiCall(url, options = {}) {
             }
         }
 
+        // Para erros HTTP, retornar objeto com success:false ao invés de lançar exceção
         if (!response.ok) {
-            throw new Error(data.message || `HTTP error! status: ${response.status}`);
+            return {
+                success: false,
+                message: data.message || data.error || `Erro ${response.status}: ${response.statusText}`,
+                status: response.status
+            };
         }
 
         return data;
     } catch (error) {
         console.error('API call error:', error);
-        throw error;
+        return {
+            success: false,
+            message: error.message || 'Erro de conexão com o servidor'
+        };
     }
 }
 

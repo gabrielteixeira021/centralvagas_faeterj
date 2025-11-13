@@ -45,11 +45,16 @@ class CompanyManager {
         showNotification('Empresa cadastrada com sucesso!', 'success');
         event.target.reset();
       } else {
-        showNotification(response.message || 'Erro ao cadastrar empresa', 'error');
+        // Mensagens específicas para erros comuns
+        let errorMessage = response.message || 'Erro ao cadastrar empresa';
+        if (response.status === 409) {
+          errorMessage = response.message; // "CNPJ já cadastrado" ou "Email já cadastrado"
+        }
+        showNotification(errorMessage, 'error');
       }
     } catch (error) {
       console.error('Error submitting company:', error);
-      showNotification('Erro ao cadastrar empresa. Por favor, tente novamente.', 'error');
+      showNotification('Erro de conexão. Por favor, tente novamente.', 'error');
     } finally {
       submitButton.disabled = false;
       submitButton.textContent = originalText;
@@ -470,6 +475,32 @@ function clearJobValidationError(event) {
   if (errorElement) {
     errorElement.remove();
   }
+}
+
+/**
+ * Show notification message
+ * @param {string} message - The message to display
+ * @param {string} type - The type of notification ('success' or 'error')
+ */
+function showNotification(message, type = 'success') {
+  const notification = document.createElement("div");
+  const bgColor = type === 'success' ? 'bg-green-500' : 'bg-red-500';
+  const icon = type === 'success' ? '✓' : '✕';
+  
+  notification.className =
+    `fixed top-4 right-4 ${bgColor} text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-fade-in`;
+  notification.innerHTML = `
+        <div class="flex items-center gap-2">
+            <span>${icon}</span>
+            <span>${message}</span>
+        </div>
+    `;
+
+  document.body.appendChild(notification);
+
+  setTimeout(() => {
+    notification.remove();
+  }, 4000);
 }
 
 /**

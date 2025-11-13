@@ -122,11 +122,16 @@ async function submitStudentForm(form, gamification) {
       showNotification('Cadastro realizado com sucesso!', 'success');
       form.reset();
     } else {
-      showNotification(response.message || 'Erro ao salvar cadastro', 'error');
+      // Mensagens específicas para erros comuns
+      let errorMessage = response.message || 'Erro ao salvar cadastro';
+      if (response.status === 409) {
+        errorMessage = response.message; // "Email já cadastrado"
+      }
+      showNotification(errorMessage, 'error');
     }
   } catch (error) {
     console.error('Error submitting form:', error);
-    showNotification('Erro ao salvar cadastro. Por favor, tente novamente.', 'error');
+    showNotification('Erro de conexão. Por favor, tente novamente.', 'error');
   } finally {
     // Re-enable submit button
     submitButton.disabled = false;
@@ -265,15 +270,20 @@ function validateForm() {
 }
 
 /**
- * Show success message
+ * Show notification message
+ * @param {string} message - The message to display
+ * @param {string} type - The type of notification ('success' or 'error')
  */
-function showSuccessMessage(message) {
+function showNotification(message, type = 'success') {
   const notification = document.createElement("div");
+  const bgColor = type === 'success' ? 'bg-green-500' : 'bg-red-500';
+  const icon = type === 'success' ? '✓' : '✕';
+  
   notification.className =
-    "fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50";
+    `fixed top-4 right-4 ${bgColor} text-white px-6 py-3 rounded-lg shadow-lg z-50 animate-fade-in`;
   notification.innerHTML = `
         <div class="flex items-center gap-2">
-            <span>✓</span>
+            <span>${icon}</span>
             <span>${message}</span>
         </div>
     `;
@@ -282,7 +292,14 @@ function showSuccessMessage(message) {
 
   setTimeout(() => {
     notification.remove();
-  }, 3000);
+  }, 4000);
+}
+
+/**
+ * Show success message (deprecated - use showNotification instead)
+ */
+function showSuccessMessage(message) {
+  showNotification(message, 'success');
 }
 
 /**
