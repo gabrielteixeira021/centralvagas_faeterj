@@ -238,24 +238,6 @@ class JobManager {
 
     document.body.appendChild(modal);
   }
-
-  showSuccessMessage(message) {
-    const notification = document.createElement("div");
-    notification.className =
-      "fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50";
-    notification.innerHTML = `
-            <div class="flex items-center gap-2">
-                <span>✓</span>
-                <span>${message}</span>
-            </div>
-        `;
-
-    document.body.appendChild(notification);
-
-    setTimeout(() => {
-      notification.remove();
-    }, 3000);
-  }
 }
 
 /**
