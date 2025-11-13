@@ -5,7 +5,7 @@
 package com.faeterj.centralvagas.model;
 
 public class Aluno {
-    private int id;
+    private String id; // MongoDB usa String ID (ObjectId)
     private String nome;
     private String email;
     private String telefone;
@@ -34,8 +34,8 @@ public class Aluno {
     }
 
     // Getters e Setters
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
 
     public String getNome() { return nome; }
     public void setNome(String nome) { this.nome = nome; }

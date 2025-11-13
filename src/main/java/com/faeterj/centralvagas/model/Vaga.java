@@ -7,7 +7,7 @@ package com.faeterj.centralvagas.model;
 import java.util.Date;
 
 public class Vaga {
-    private int id;
+    private String id; // MongoDB usa String ID (ObjectId)
     private String titulo;
     private String descricao;
     private String empresa;
@@ -19,7 +19,7 @@ public class Vaga {
     private double salario;
     private Date dataCadastro;
     private boolean ativa;
-    private int empresaId;
+    private String empresaId; // String para referenciar ObjectId
 
     // Construtor vazio
     public Vaga() {}
@@ -27,7 +27,7 @@ public class Vaga {
     // Construtor completo
     public Vaga(String titulo, String descricao, String empresa, String area, 
                 String requisitos, String beneficios, String tipo, String localizacao, 
-                double salario, int empresaId) {
+                double salario, String empresaId) {
         this.titulo = titulo;
         this.descricao = descricao;
         this.empresa = empresa;
@@ -43,8 +43,8 @@ public class Vaga {
     }
 
     // Getters e Setters
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
 
     public String getTitulo() { return titulo; }
     public void setTitulo(String titulo) { this.titulo = titulo; }
@@ -79,6 +79,6 @@ public class Vaga {
     public boolean isAtiva() { return ativa; }
     public void setAtiva(boolean ativa) { this.ativa = ativa; }
 
-    public int getEmpresaId() { return empresaId; }
-    public void setEmpresaId(int empresaId) { this.empresaId = empresaId; }
+    public String getEmpresaId() { return empresaId; }
+    public void setEmpresaId(String empresaId) { this.empresaId = empresaId; }
 }

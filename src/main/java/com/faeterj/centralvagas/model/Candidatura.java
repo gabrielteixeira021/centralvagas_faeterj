@@ -7,9 +7,9 @@ package com.faeterj.centralvagas.model;
 import java.util.Date;
 
 public class Candidatura {
-    private int id;
-    private int alunoId;
-    private int vagaId;
+    private String id; // MongoDB usa String ID (ObjectId)
+    private String alunoId; // String para referenciar ObjectId
+    private String vagaId; // String para referenciar ObjectId
     private Date dataCandidatura;
     private String status; // Pendente, Aceita, Rejeitada
     private String mensagem;
@@ -18,7 +18,7 @@ public class Candidatura {
     public Candidatura() {}
 
     // Construtor completo
-    public Candidatura(int alunoId, int vagaId, String mensagem) {
+    public Candidatura(String alunoId, String vagaId, String mensagem) {
         this.alunoId = alunoId;
         this.vagaId = vagaId;
         this.dataCandidatura = new Date();
@@ -27,14 +27,14 @@ public class Candidatura {
     }
 
     // Getters e Setters
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    public String getId() { return id; }
+    public void setId(String id) { this.id = id; }
 
-    public int getAlunoId() { return alunoId; }
-    public void setAlunoId(int alunoId) { this.alunoId = alunoId; }
+    public String getAlunoId() { return alunoId; }
+    public void setAlunoId(String alunoId) { this.alunoId = alunoId; }
 
-    public int getVagaId() { return vagaId; }
-    public void setVagaId(int vagaId) { this.vagaId = vagaId; }
+    public String getVagaId() { return vagaId; }
+    public void setVagaId(String vagaId) { this.vagaId = vagaId; }
 
     public Date getDataCandidatura() { return dataCandidatura; }
     public void setDataCandidatura(Date dataCandidatura) { this.dataCandidatura = dataCandidatura; }

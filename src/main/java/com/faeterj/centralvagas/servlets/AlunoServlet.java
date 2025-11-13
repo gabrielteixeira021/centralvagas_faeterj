@@ -1,6 +1,6 @@
 package com.faeterj.centralvagas.servlets;
 
-import com.faeterj.centralvagas.dao.AlunoDAO;
+import com.faeterj.centralvagas.dao.AlunoMongoDAO;
 import com.faeterj.centralvagas.model.Aluno;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -8,7 +8,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet(name = "AlunoServlet", urlPatterns = {"/aluno"})
@@ -18,12 +17,14 @@ public class AlunoServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            AlunoDAO alunoDAO = new AlunoDAO();
+            AlunoMongoDAO alunoDAO = new AlunoMongoDAO();
             List<Aluno> alunos = alunoDAO.listarTodos(); // Lista todos alunos
             request.setAttribute("alunos", alunos);
             request.getRequestDispatcher("aluno.jsp").forward(request, response);
-        } catch (ServletException | IOException | SQLException e) {
-            throw new ServletException(e);
+        } catch (Exception e) {
+            request.setAttribute("msgErro", "Erro ao carregar alunos: " + e.getMessage());
+            e.printStackTrace();
+            request.getRequestDispatcher("aluno.jsp").forward(request, response);
         }
     }
 
@@ -44,11 +45,10 @@ public class AlunoServlet extends HttpServlet {
         String idStr = request.getParameter("id");
         int pontuacao = 0; // ajuste caso tenha gamificação no cadastro
 
-        AlunoDAO alunoDAO = new AlunoDAO();
+        AlunoMongoDAO alunoDAO = new AlunoMongoDAO();
         try {
             if ("atualizar".equals(operacao) && idStr != null && !idStr.isEmpty()) {
-                int id = Integer.parseInt(idStr);
-                Aluno aluno = alunoDAO.buscarPorId(id);
+                Aluno aluno = alunoDAO.buscarPorId(idStr); // ID agora é String
                 if (aluno != null) {
                     aluno.setNome(nome);
                     aluno.setEmail(email);
@@ -68,16 +68,8 @@ public class AlunoServlet extends HttpServlet {
                 alunoDAO.inserir(aluno);
                 request.setAttribute("msgSucesso", "Cadastro realizado com sucesso!");
             }
-        } catch (NumberFormatException e) {
-            request.setAttribute("msgErro", "Erro no formato de número: " + e.getMessage());
-            e.printStackTrace(); // Log para debugging
-        } catch (SQLException e) {
-            request.setAttribute("msgErro", "Erro no banco de dados: " + e.getMessage() + 
-                               " | SQL State: " + e.getSQLState() + 
-                               " | Error Code: " + e.getErrorCode());
-            e.printStackTrace(); // Log para debugging
         } catch (Exception e) {
-            request.setAttribute("msgErro", "Erro inesperado: " + e.getMessage());
+            request.setAttribute("msgErro", "Erro: " + e.getMessage());
             e.printStackTrace(); // Log para debugging
         }
         doGet(request, response); // Para atualizar a listagem após inserção/atualização
