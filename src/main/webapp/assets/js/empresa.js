@@ -3,6 +3,61 @@
  */
 
 /**
+ * Company registration functionality
+ */
+class CompanyManager {
+  constructor() {
+    this.initializeCompanyForm();
+  }
+
+  initializeCompanyForm() {
+    const form = document.getElementById("empresa-form");
+    if (form) {
+      form.addEventListener("submit", (e) => this.handleCompanySubmission(e));
+    }
+  }
+
+  async handleCompanySubmission(event) {
+    event.preventDefault();
+
+    const submitButton = event.target.querySelector('button[type="submit"]');
+    const originalText = submitButton.textContent;
+
+    try {
+      submitButton.disabled = true;
+      submitButton.textContent = 'Cadastrando...';
+
+      const formData = new FormData(event.target);
+      const empresaData = {
+        nome: formData.get("nome"),
+        cnpj: formData.get("cnpj"),
+        email: formData.get("email"),
+        telefone: formData.get("telefone") || "",
+        endereco: formData.get("endereco") || "",
+        setor: formData.get("setor") || "",
+        descricao: formData.get("descricao") || "",
+        senha: formData.get("senha")
+      };
+
+      const response = await EmpresaAPI.create(empresaData);
+
+      if (response.success) {
+        showNotification('Empresa cadastrada com sucesso!', 'success');
+        event.target.reset();
+      } else {
+        showNotification(response.message || 'Erro ao cadastrar empresa', 'error');
+      }
+    } catch (error) {
+      console.error('Error submitting company:', error);
+      showNotification('Erro ao cadastrar empresa. Por favor, tente novamente.', 'error');
+    } finally {
+      submitButton.disabled = false;
+      submitButton.textContent = originalText;
+    }
+  }
+}
+
+/**
  * Job management functionality
  */
 class JobManager {
@@ -50,18 +105,31 @@ class JobManager {
       submitButton.textContent = 'Publicando...';
 
       const formData = new FormData(event.target);
+      
+      // Get salary value, default to 0 if empty
+      const salarioValue = formData.get("salario");
+      const salario = salarioValue && salarioValue.trim() !== "" ? parseFloat(salarioValue) : 0;
+
       const jobData = {
         titulo: formData.get("titulo"),
         descricao: formData.get("descricao"),
         empresa: formData.get("empresa"),
         empresaId: "temp-empresa-id", // TODO: Get from logged in empresa
         area: formData.get("area"),
-        requisitos: formData.get("requisitos") || "A definir",
-        beneficios: formData.get("beneficios") || "A definir",
+        requisitos: formData.get("requisitos"),
+        beneficios: formData.get("beneficios"),
         tipo: formData.get("tipo"),
         localizacao: formData.get("localizacao"),
-        salario: formData.get("salario")
+        salario: salario
       };
+
+      // Validate required fields
+      if (!jobData.titulo || !jobData.descricao || !jobData.empresa || 
+          !jobData.area || !jobData.requisitos || !jobData.beneficios || 
+          !jobData.tipo || !jobData.localizacao) {
+        showNotification('Por favor, preencha todos os campos obrigatórios', 'error');
+        return;
+      }
 
       const response = await VagaAPI.create(jobData);
 
@@ -107,13 +175,72 @@ class JobManager {
   }
 
   viewJob(jobId) {
-    console.log("Visualizing job:", jobId);
+    const job = this.jobs.find(j => j.id === jobId);
+    if (!job) {
+      showNotification('Vaga não encontrada', 'error');
+      return;
+    }
+
+    const salarioDisplay = job.salario && job.salario > 0 ? `R$ ${job.salario.toFixed(2)}` : 'A combinar';
+    const statusBadge = job.ativa ? 
+      '<span class="inline-flex px-2 py-1 text-xs font-medium bg-green-100 text-green-800 rounded-full">Ativa</span>' : 
+      '<span class="inline-flex px-2 py-1 text-xs font-medium bg-gray-100 text-gray-800 rounded-full">Inativa</span>';
+
     this.showModal(
       "Detalhes da Vaga",
       `
-            <p>Visualizando detalhes da vaga ID: ${jobId}</p>
-            <p>Esta funcionalidade seria implementada para mostrar todos os detalhes da vaga.</p>
-        `
+        <div class="space-y-4">
+          <div>
+            <h4 class="font-semibold text-gray-900 dark:text-white mb-2">${job.titulo}</h4>
+            <p class="text-sm text-gray-600 dark:text-gray-400">${job.empresa} • ${job.tipo}</p>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Área</p>
+              <p class="text-gray-900 dark:text-white">${job.area}</p>
+            </div>
+            <div>
+              <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Status</p>
+              <p>${statusBadge}</p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Localização</p>
+              <p class="text-gray-900 dark:text-white">${job.localizacao || 'Não informado'}</p>
+            </div>
+            <div>
+              <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Salário</p>
+              <p class="text-gray-900 dark:text-white">${salarioDisplay}</p>
+            </div>
+          </div>
+
+          <div>
+            <p class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Descrição</p>
+            <p class="text-gray-900 dark:text-white">${job.descricao || 'Não informado'}</p>
+          </div>
+
+          <div>
+            <p class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Requisitos</p>
+            <p class="text-gray-900 dark:text-white">${job.requisitos || 'Não informado'}</p>
+          </div>
+
+          <div>
+            <p class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">Benefícios</p>
+            <p class="text-gray-900 dark:text-white">${job.beneficios || 'Não informado'}</p>
+          </div>
+
+          ${job.dataCadastro ? `
+          <div>
+            <p class="text-sm text-gray-500 dark:text-gray-400">
+              Publicado em: ${job.dataCadastro}
+            </p>
+          </div>
+          ` : ''}
+        </div>
+      `
     );
   }
 
@@ -190,11 +317,19 @@ class JobManager {
       const row = document.createElement("tr");
       row.className = "border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-slate-700";
       const status = job.ativa ? 'Ativa' : 'Inativa';
-      const statusClass = job.ativa ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800';
+      const statusClass = job.ativa ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' : 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300';
+      const salarioDisplay = job.salario && job.salario > 0 ? `R$ ${job.salario.toFixed(2)}` : 'A combinar';
       
       row.innerHTML = `
-        <td class="py-3 px-4 text-gray-600 dark:text-gray-300">${job.titulo || 'N/A'}</td>
+        <td class="py-3 px-4">
+          <div class="text-gray-900 dark:text-white font-medium">${job.titulo || 'N/A'}</div>
+          <div class="text-sm text-gray-500 dark:text-gray-400">${job.tipo || 'N/A'}</div>
+        </td>
         <td class="py-3 px-4 text-gray-600 dark:text-gray-300">${job.area || 'N/A'}</td>
+        <td class="py-3 px-4">
+          <div class="text-gray-600 dark:text-gray-300">${job.localizacao || 'N/A'}</div>
+          <div class="text-sm text-gray-500 dark:text-gray-400">${salarioDisplay}</div>
+        </td>
         <td class="py-3 px-4 text-gray-600 dark:text-gray-300">0</td>
         <td class="py-3 px-4">
           <span class="inline-flex px-2 py-1 text-xs font-medium ${statusClass} rounded-full">${status}</span>
@@ -341,6 +476,7 @@ function clearJobValidationError(event) {
  * Initialize empresa page specific functionality
  */
 function initializeEmpresaPage() {
+  new CompanyManager();
   new JobManager();
   initializeJobFormValidation();
 }

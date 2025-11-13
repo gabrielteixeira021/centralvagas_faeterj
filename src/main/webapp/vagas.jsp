@@ -131,49 +131,70 @@
                     <!-- Search Filters -->
                     <div class="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm mb-6">
                         <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-4">🔍 Filtros de Busca</h3>
-                        <div class="space-y-4">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Buscar
-                                    por palavra-chave</label>
-                                <input type="text" placeholder="Ex: Java, Design, Marketing..."
-                                    class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-slate-700 dark:text-white">
-                            </div>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <label
-                                        class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Área</label>
-                                    <select
-                                        class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-slate-700 dark:text-white">
-                                        <option>Todas as áreas</option>
-                                        <option>Back-end</option>
-                                        <option>Front-end</option>
-                                        <option>Full Stack</option>
-                                        <option>Cybersecurity</option>
-                                        <option>Data Science</option>
-                                        <option>Mobile</option>
-                                        <option>DevOps</option>
-                                        <option>Blockchain</option>
-                                        <option>Game Dev</option>
-                                    </select>
+                        <form id="job-search-form">
+                            <div class="space-y-4">
+                                <div class="flex items-center gap-4 mb-4">
+                                    <label class="flex items-center gap-2 cursor-pointer">
+                                        <input type="radio" name="filtro" value="todas" checked
+                                            class="w-4 h-4 text-blue-600 focus:ring-blue-500">
+                                        <span class="text-gray-700 dark:text-gray-300">Todas as vagas</span>
+                                    </label>
+                                    <label class="flex items-center gap-2 cursor-pointer">
+                                        <input type="radio" name="filtro" value="ativas"
+                                            class="w-4 h-4 text-blue-600 focus:ring-blue-500">
+                                        <span class="text-gray-700 dark:text-gray-300">Somente vagas ativas</span>
+                                    </label>
                                 </div>
                                 <div>
-                                    <label
-                                        class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Tipo</label>
-                                    <select
+                                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Buscar
+                                        por palavra-chave</label>
+                                    <input type="text" id="keyword-search" placeholder="Ex: Java, Design, Marketing..."
                                         class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-slate-700 dark:text-white">
-                                        <option>Todos os tipos</option>
-                                        <option>Estágio</option>
-                                        <option>Trainee</option>
-                                        <option>CLT</option>
-                                        <option>PJ</option>
-                                    </select>
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label
+                                            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Área</label>
+                                        <select id="area-filter"
+                                            class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-slate-700 dark:text-white">
+                                            <option value="">Todas as áreas</option>
+                                            <option value="Tecnologia">Tecnologia</option>
+                                            <option value="Back-end">Back-end</option>
+                                            <option value="Front-end">Front-end</option>
+                                            <option value="Full Stack">Full Stack</option>
+                                            <option value="Cybersecurity">Cybersecurity</option>
+                                            <option value="Data Science">Data Science</option>
+                                            <option value="Mobile">Mobile</option>
+                                            <option value="DevOps">DevOps</option>
+                                            <option value="Blockchain">Blockchain</option>
+                                            <option value="Game Dev">Game Dev</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label
+                                            class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Tipo</label>
+                                        <select id="tipo-filter"
+                                            class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-slate-700 dark:text-white">
+                                            <option value="">Todos os tipos</option>
+                                            <option value="Estágio">Estágio</option>
+                                            <option value="Trainee">Trainee</option>
+                                            <option value="CLT">CLT</option>
+                                            <option value="PJ">PJ</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="flex gap-2">
+                                    <button type="submit"
+                                        class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium">
+                                        Buscar Vagas
+                                    </button>
+                                    <button type="button" id="clear-filters"
+                                        class="px-6 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors font-medium">
+                                        Limpar Filtros
+                                    </button>
                                 </div>
                             </div>
-                            <button
-                                class="w-full md:w-auto px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium">
-                                Buscar Vagas
-                            </button>
-                        </div>
+                        </form>
                     </div>
 
                     <!-- Architecture Info -->

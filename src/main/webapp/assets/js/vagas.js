@@ -232,24 +232,107 @@ function initializeElementSDK() {
 /**
  * Job search functionality
  */
+let allJobs = [];
+let filteredJobs = [];
+
 function initializeJobSearch() {
   const searchForm = document.getElementById("job-search-form");
   if (searchForm) {
     searchForm.addEventListener("submit", function (e) {
       e.preventDefault();
-      // Add search functionality here
-      console.log("Searching for jobs...");
+      applyFilters();
     });
   }
 
-  // Add candidate buttons functionality
-  const candidateButtons = document.querySelectorAll(".candidate-btn");
-  candidateButtons.forEach((button) => {
-    button.addEventListener("click", function () {
-      const jobTitle = this.getAttribute("data-job");
-      alert(`Candidatura para: ${jobTitle}`);
+  const clearButton = document.getElementById("clear-filters");
+  if (clearButton) {
+    clearButton.addEventListener("click", function () {
+      document.getElementById("job-search-form").reset();
+      applyFilters();
     });
+  }
+
+  // Add real-time filtering
+  const areaFilter = document.getElementById("area-filter");
+  const tipoFilter = document.getElementById("tipo-filter");
+  const keywordSearch = document.getElementById("keyword-search");
+
+  if (areaFilter) areaFilter.addEventListener("change", applyFilters);
+  if (tipoFilter) tipoFilter.addEventListener("change", applyFilters);
+  if (keywordSearch) {
+    keywordSearch.addEventListener("input", debounce(applyFilters, 500));
+  }
+
+  // Listen to radio button changes
+  const radioButtons = document.querySelectorAll('input[name="filtro"]');
+  radioButtons.forEach(radio => {
+    radio.addEventListener("change", applyFilters);
   });
+}
+
+/**
+ * Debounce function for search input
+ */
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
+/**
+ * Apply filters to jobs list
+ */
+function applyFilters() {
+  const filtroTipo = document.querySelector('input[name="filtro"]:checked')?.value || 'todas';
+  const area = document.getElementById("area-filter")?.value || "";
+  const tipo = document.getElementById("tipo-filter")?.value || "";
+  const keyword = document.getElementById("keyword-search")?.value.toLowerCase() || "";
+
+  filteredJobs = allJobs.filter(job => {
+    // Filter by active status
+    if (filtroTipo === 'ativas' && !job.ativa) {
+      return false;
+    }
+
+    // Filter by area
+    if (area && job.area !== area) {
+      return false;
+    }
+
+    // Filter by tipo
+    if (tipo && job.tipo !== tipo) {
+      return false;
+    }
+
+    // Filter by keyword
+    if (keyword) {
+      const searchableText = `${job.titulo} ${job.descricao} ${job.empresa} ${job.area}`.toLowerCase();
+      if (!searchableText.includes(keyword)) {
+        return false;
+      }
+    }
+
+    return true;
+  });
+
+  renderJobsTable(filteredJobs);
+  updateResultsCount(filteredJobs.length, allJobs.length);
+}
+
+/**
+ * Update results count display
+ */
+function updateResultsCount(filtered, total) {
+  const header = document.querySelector('.bg-white.dark\\:bg-slate-800.rounded-xl.p-6.shadow-sm h3');
+  if (header) {
+    header.textContent = `Vagas Disponíveis (${filtered} de ${total})`;
+  }
 }
 
 /**
@@ -257,9 +340,11 @@ function initializeJobSearch() {
  */
 async function loadAvailableJobs() {
   try {
-    const response = await VagaAPI.getActive();
+    const response = await VagaAPI.getAll(); // Get all jobs
     if (response.success && response.data) {
-      renderJobsTable(response.data);
+      allJobs = response.data;
+      filteredJobs = allJobs;
+      applyFilters(); // Apply initial filters
     }
   } catch (error) {
     console.error('Error loading jobs:', error);
@@ -281,7 +366,7 @@ function renderJobsTable(jobs) {
     const row = document.createElement("tr");
     row.innerHTML = `
       <td colspan="5" class="py-4 px-4 text-center text-gray-500 dark:text-gray-400">
-        Nenhuma vaga disponível no momento
+        Nenhuma vaga encontrada com os filtros selecionados
       </td>
     `;
     tbody.appendChild(row);
@@ -292,23 +377,73 @@ function renderJobsTable(jobs) {
     const row = document.createElement("tr");
     row.className = "border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-slate-700";
     
+    const statusBadge = job.ativa ? 
+      '<span class="inline-flex px-2 py-1 text-xs font-medium bg-green-100 text-green-800 rounded-full ml-2">Ativa</span>' : 
+      '<span class="inline-flex px-2 py-1 text-xs font-medium bg-gray-100 text-gray-800 rounded-full ml-2">Inativa</span>';
+    
     row.innerHTML = `
       <td class="py-3 px-4 text-gray-600 dark:text-gray-300">${job.empresa || 'N/A'}</td>
-      <td class="py-3 px-4 text-gray-600 dark:text-gray-300">${job.titulo || 'N/A'}</td>
+      <td class="py-3 px-4 text-gray-600 dark:text-gray-300">
+        ${job.titulo || 'N/A'}
+        ${statusBadge}
+      </td>
       <td class="py-3 px-4 text-gray-600 dark:text-gray-300">${job.area || 'N/A'}</td>
       <td class="py-3 px-4 text-gray-600 dark:text-gray-300">${job.tipo || 'N/A'}</td>
       <td class="py-3 px-4">
-        <button class="candidate-btn px-3 py-1 bg-blue-600 text-white rounded text-sm hover:bg-blue-700 transition-colors" 
-                data-job-id="${job.id}" data-job="${job.titulo}">
+        <button class="candidate-btn px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm" 
+                data-job-id="${job.id}" data-job="${job.titulo}"
+                onclick="handleCandidatura('${job.id}', '${job.titulo}')">
           Candidatar
         </button>
       </td>
     `;
     tbody.appendChild(row);
   });
+}
 
-  // Re-attach event listeners
-  initializeJobSearch();
+/**
+ * Handle candidatura button click
+ */
+function handleCandidatura(jobId, jobTitle) {
+  const modal = document.createElement("div");
+  modal.className = "fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50";
+  modal.innerHTML = `
+    <div class="bg-white dark:bg-slate-800 rounded-lg p-6 max-w-md w-full mx-4">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Candidatar-se à Vaga</h3>
+        <button onclick="this.closest('.fixed').remove()" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+          <span class="text-xl">×</span>
+        </button>
+      </div>
+      <div class="text-gray-700 dark:text-gray-300 mb-4">
+        <p class="mb-2"><strong>Vaga:</strong> ${jobTitle}</p>
+        <p class="mb-4">Deseja se candidatar para esta vaga?</p>
+        <p class="text-sm text-gray-500 dark:text-gray-400">
+          Certifique-se de que seu cadastro está completo antes de se candidatar.
+        </p>
+      </div>
+      <div class="flex gap-2 justify-end">
+        <button onclick="this.closest('.fixed').remove()" 
+                class="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded-lg transition-colors">
+          Cancelar
+        </button>
+        <button onclick="submitCandidatura('${jobId}'); this.closest('.fixed').remove();" 
+                class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">
+          Confirmar Candidatura
+        </button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+}
+
+/**
+ * Submit candidatura
+ */
+function submitCandidatura(jobId) {
+  // TODO: Implement candidatura submission
+  showNotification('Funcionalidade de candidatura será implementada em breve!', 'info');
+  console.log('Candidatura para vaga:', jobId);
 }
 
 /**

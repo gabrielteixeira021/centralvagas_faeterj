@@ -141,7 +141,13 @@ const EmpresaAPI = {
      */
     async getAll(setor = null) {
         const url = setor ? `${API_ENDPOINTS.empresas}?setor=${setor}` : API_ENDPOINTS.empresas;
-        return await apiCall(url);
+        const response = await apiCall(url);
+        // Backend returns { success, total, empresas }
+        return {
+            success: response.success,
+            data: response.empresas || [],
+            total: response.total || 0
+        };
     },
 
     /**
@@ -150,7 +156,12 @@ const EmpresaAPI = {
      * @returns {Promise<object>} Empresa data
      */
     async getById(id) {
-        return await apiCall(`${API_ENDPOINTS.empresas}?id=${id}`);
+        const response = await apiCall(`${API_ENDPOINTS.empresas}?id=${id}`);
+        // Backend returns { success, empresa }
+        return {
+            success: response.success,
+            data: response.empresa
+        };
     },
 
     /**
@@ -161,16 +172,26 @@ const EmpresaAPI = {
     async create(empresaData) {
         const formData = new URLSearchParams();
         Object.keys(empresaData).forEach(key => {
-            formData.append(key, empresaData[key]);
+            if (empresaData[key] !== null && empresaData[key] !== undefined) {
+                formData.append(key, empresaData[key]);
+            }
         });
 
-        return await apiCall(API_ENDPOINTS.empresas, {
+        const response = await apiCall(API_ENDPOINTS.empresas, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             body: formData.toString()
         });
+        
+        // Backend returns { success, message, id, empresa }
+        return {
+            success: response.success,
+            message: response.message,
+            data: response.empresa,
+            id: response.id
+        };
     },
 
     /**
@@ -183,16 +204,24 @@ const EmpresaAPI = {
         const formData = new URLSearchParams();
         formData.append('id', id);
         Object.keys(empresaData).forEach(key => {
-            formData.append(key, empresaData[key]);
+            if (empresaData[key] !== null && empresaData[key] !== undefined) {
+                formData.append(key, empresaData[key]);
+            }
         });
 
-        return await apiCall(API_ENDPOINTS.empresas, {
+        const response = await apiCall(API_ENDPOINTS.empresas, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             body: formData.toString()
         });
+        
+        return {
+            success: response.success,
+            message: response.message,
+            data: response.empresa
+        };
     },
 
     /**
@@ -201,9 +230,14 @@ const EmpresaAPI = {
      * @returns {Promise<object>} Deletion result
      */
     async delete(id) {
-        return await apiCall(`${API_ENDPOINTS.empresas}?id=${id}`, {
+        const response = await apiCall(`${API_ENDPOINTS.empresas}?id=${id}`, {
             method: 'DELETE'
         });
+        
+        return {
+            success: response.success,
+            message: response.message
+        };
     }
 };
 
@@ -225,7 +259,13 @@ const VagaAPI = {
                 url += `&valor=${valor}`;
             }
         }
-        return await apiCall(url);
+        const response = await apiCall(url);
+        // Backend returns { success, total, vagas }
+        return {
+            success: response.success,
+            data: response.vagas || [],
+            total: response.total || 0
+        };
     },
 
     /**
@@ -233,7 +273,7 @@ const VagaAPI = {
      * @returns {Promise<Array>} List of active vagas
      */
     async getActive() {
-        return await apiCall(`${API_ENDPOINTS.vagas}?filtro=ativas`);
+        return await this.getAll('ativas');
     },
 
     /**
@@ -242,7 +282,7 @@ const VagaAPI = {
      * @returns {Promise<Array>} List of vagas in area
      */
     async getByArea(area) {
-        return await apiCall(`${API_ENDPOINTS.vagas}?filtro=area&valor=${area}`);
+        return await this.getAll('area', area);
     },
 
     /**
@@ -251,7 +291,12 @@ const VagaAPI = {
      * @returns {Promise<object>} Vaga data
      */
     async getById(id) {
-        return await apiCall(`${API_ENDPOINTS.vagas}?id=${id}`);
+        const response = await apiCall(`${API_ENDPOINTS.vagas}?id=${id}`);
+        // Backend returns { success, vaga }
+        return {
+            success: response.success,
+            data: response.vaga
+        };
     },
 
     /**
@@ -262,16 +307,26 @@ const VagaAPI = {
     async create(vagaData) {
         const formData = new URLSearchParams();
         Object.keys(vagaData).forEach(key => {
-            formData.append(key, vagaData[key]);
+            if (vagaData[key] !== null && vagaData[key] !== undefined) {
+                formData.append(key, vagaData[key]);
+            }
         });
 
-        return await apiCall(API_ENDPOINTS.vagas, {
+        const response = await apiCall(API_ENDPOINTS.vagas, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             body: formData.toString()
         });
+        
+        // Backend returns { success, message, id, vaga }
+        return {
+            success: response.success,
+            message: response.message,
+            data: response.vaga,
+            id: response.id
+        };
     },
 
     /**
@@ -284,16 +339,24 @@ const VagaAPI = {
         const formData = new URLSearchParams();
         formData.append('id', id);
         Object.keys(vagaData).forEach(key => {
-            formData.append(key, vagaData[key]);
+            if (vagaData[key] !== null && vagaData[key] !== undefined) {
+                formData.append(key, vagaData[key]);
+            }
         });
 
-        return await apiCall(API_ENDPOINTS.vagas, {
+        const response = await apiCall(API_ENDPOINTS.vagas, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             body: formData.toString()
         });
+        
+        return {
+            success: response.success,
+            message: response.message,
+            data: response.vaga
+        };
     },
 
     /**
@@ -306,13 +369,18 @@ const VagaAPI = {
         formData.append('id', id);
         formData.append('operacao', 'desativar');
 
-        return await apiCall(API_ENDPOINTS.vagas, {
+        const response = await apiCall(API_ENDPOINTS.vagas, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             body: formData.toString()
         });
+        
+        return {
+            success: response.success,
+            message: response.message
+        };
     },
 
     /**
@@ -321,9 +389,14 @@ const VagaAPI = {
      * @returns {Promise<object>} Deletion result
      */
     async delete(id) {
-        return await apiCall(`${API_ENDPOINTS.vagas}?id=${id}`, {
+        const response = await apiCall(`${API_ENDPOINTS.vagas}?id=${id}`, {
             method: 'DELETE'
         });
+        
+        return {
+            success: response.success,
+            message: response.message
+        };
     }
 };
 
