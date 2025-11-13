@@ -134,25 +134,33 @@
                             <h4
                                 class="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">
                                 Vagas Ativas</h4>
-                            <p class="text-3xl font-bold text-gray-900 dark:text-white">127</p>
+                            <p id="stat-vagas" class="text-3xl font-bold text-gray-900 dark:text-white">
+                                <span class="animate-pulse bg-gray-300 dark:bg-gray-600 rounded w-12 h-8 inline-block"></span>
+                            </p>
                         </div>
                         <div class="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm border-l-4 border-green-500">
                             <h4
                                 class="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">
                                 Empresas Parceiras</h4>
-                            <p class="text-3xl font-bold text-gray-900 dark:text-white">45</p>
+                            <p id="stat-empresas" class="text-3xl font-bold text-gray-900 dark:text-white">
+                                <span class="animate-pulse bg-gray-300 dark:bg-gray-600 rounded w-12 h-8 inline-block"></span>
+                            </p>
                         </div>
                         <div class="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm border-l-4 border-purple-500">
                             <h4
                                 class="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">
                                 Alunos Cadastrados</h4>
-                            <p class="text-3xl font-bold text-gray-900 dark:text-white">892</p>
+                            <p id="stat-alunos" class="text-3xl font-bold text-gray-900 dark:text-white">
+                                <span class="animate-pulse bg-gray-300 dark:bg-gray-600 rounded w-12 h-8 inline-block"></span>
+                            </p>
                         </div>
                         <div class="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm border-l-4 border-orange-500">
                             <h4
                                 class="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">
-                                Contratações</h4>
-                            <p class="text-3xl font-bold text-gray-900 dark:text-white">234</p>
+                                Candidaturas</h4>
+                            <p id="stat-candidaturas" class="text-3xl font-bold text-gray-900 dark:text-white">
+                                <span class="animate-pulse bg-gray-300 dark:bg-gray-600 rounded w-12 h-8 inline-block"></span>
+                            </p>
                         </div>
                     </div><!-- About Card -->
                     <div class="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-sm mb-6">
@@ -198,34 +206,25 @@
                                             Status</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr
-                                        class="border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-slate-700">
-                                        <td class="py-3 px-4 text-gray-600 dark:text-gray-300">Tech Solutions</td>
-                                        <td class="py-3 px-4 text-gray-600 dark:text-gray-300">Desenvolvedor Java Jr
-                                        </td>
-                                        <td class="py-3 px-4 text-gray-600 dark:text-gray-300">Back-end</td>
-                                        <td class="py-3 px-4"><span
-                                                class="inline-flex px-2 py-1 text-xs font-medium bg-green-100 text-green-800 rounded-full">Aberta</span>
-                                        </td>
+                                <tbody id="vagas-destaque">
+                                    <!-- Loading placeholder -->
+                                    <tr class="animate-pulse">
+                                        <td class="py-3 px-4"><div class="h-4 bg-gray-300 dark:bg-gray-600 rounded w-24"></div></td>
+                                        <td class="py-3 px-4"><div class="h-4 bg-gray-300 dark:bg-gray-600 rounded w-32"></div></td>
+                                        <td class="py-3 px-4"><div class="h-4 bg-gray-300 dark:bg-gray-600 rounded w-20"></div></td>
+                                        <td class="py-3 px-4"><div class="h-6 bg-gray-300 dark:bg-gray-600 rounded-full w-16"></div></td>
                                     </tr>
-                                    <tr
-                                        class="border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-slate-700">
-                                        <td class="py-3 px-4 text-gray-600 dark:text-gray-300">DataCorp</td>
-                                        <td class="py-3 px-4 text-gray-600 dark:text-gray-300">Analista de Dados</td>
-                                        <td class="py-3 px-4 text-gray-600 dark:text-gray-300">Data Science</td>
-                                        <td class="py-3 px-4"><span
-                                                class="inline-flex px-2 py-1 text-xs font-medium bg-green-100 text-green-800 rounded-full">Aberta</span>
-                                        </td>
+                                    <tr class="animate-pulse">
+                                        <td class="py-3 px-4"><div class="h-4 bg-gray-300 dark:bg-gray-600 rounded w-28"></div></td>
+                                        <td class="py-3 px-4"><div class="h-4 bg-gray-300 dark:bg-gray-600 rounded w-36"></div></td>
+                                        <td class="py-3 px-4"><div class="h-4 bg-gray-300 dark:bg-gray-600 rounded w-24"></div></td>
+                                        <td class="py-3 px-4"><div class="h-6 bg-gray-300 dark:bg-gray-600 rounded-full w-16"></div></td>
                                     </tr>
-                                    <tr class="hover:bg-gray-50 dark:hover:bg-slate-700">
-                                        <td class="py-3 px-4 text-gray-600 dark:text-gray-300">WebDesign Pro</td>
-                                        <td class="py-3 px-4 text-gray-600 dark:text-gray-300">Desenvolvedor Front-end
-                                            Jr</td>
-                                        <td class="py-3 px-4 text-gray-600 dark:text-gray-300">Front-end</td>
-                                        <td class="py-3 px-4"><span
-                                                class="inline-flex px-2 py-1 text-xs font-medium bg-yellow-100 text-yellow-800 rounded-full">Poucas
-                                                vagas</span></td>
+                                    <tr class="animate-pulse">
+                                        <td class="py-3 px-4"><div class="h-4 bg-gray-300 dark:bg-gray-600 rounded w-20"></div></td>
+                                        <td class="py-3 px-4"><div class="h-4 bg-gray-300 dark:bg-gray-600 rounded w-40"></div></td>
+                                        <td class="py-3 px-4"><div class="h-4 bg-gray-300 dark:bg-gray-600 rounded w-16"></div></td>
+                                        <td class="py-3 px-4"><div class="h-6 bg-gray-300 dark:bg-gray-600 rounded-full w-20"></div></td>
                                     </tr>
                                 </tbody>
                             </table>
