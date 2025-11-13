@@ -1,0 +1,267 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2025-11-13T00:06:00.000Z",
+  "__export_source": "insomnia.desktop.app:v2023.5.8",
+  "resources": [
+    {
+      "_id": "req_api_alunos_list",
+      "parentId": "fld_api_alunos",
+      "modified": 1699900000000,
+      "created": 1699900000000,
+      "url": "http://localhost:10000/AP6/api/alunos",
+      "name": "📋 GET All Alunos",
+      "description": "Lista todos os alunos - Retorna JSON puro",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1699900000000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "_type": "request"
+    },
+    {
+      "_id": "req_api_aluno_get_by_id",
+      "parentId": "fld_api_alunos",
+      "modified": 1699900100000,
+      "created": 1699900100000,
+      "url": "http://localhost:10000/AP6/api/alunos?id=SUBSTITUA_PELO_ID",
+      "name": "🔍 GET Aluno por ID",
+      "description": "Busca aluno específico por ID",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "_type": "request"
+    },
+    {
+      "_id": "req_api_aluno_create",
+      "parentId": "fld_api_alunos",
+      "modified": 1699900200000,
+      "created": 1699900200000,
+      "url": "http://localhost:10000/AP6/api/alunos",
+      "name": "➕ POST Create Aluno",
+      "description": "Cria novo aluno via API REST",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/x-www-form-urlencoded",
+        "params": [
+          {"name": "nome", "value": "Carlos API REST", "id": "pair_nome_api"},
+          {"name": "email", "value": "carlos.api@faeterj.edu.br", "id": "pair_email_api"},
+          {"name": "telefone", "value": "(21) 99888-7777", "id": "pair_telefone_api"},
+          {"name": "curso", "value": "Análise e Desenvolvimento de Sistemas", "id": "pair_curso_api"},
+          {"name": "periodo", "value": "3º período", "id": "pair_periodo_api"},
+          {"name": "turno", "value": "Noite", "id": "pair_turno_api"},
+          {"name": "competencias", "value": "Java, REST API, JSON, MongoDB, Servlets", "id": "pair_comp_api"},
+          {"name": "experiencia", "value": "Estudante focado em APIs REST e desenvolvimento backend", "id": "pair_exp_api"}
+        ]
+      },
+      "parameters": [],
+      "headers": [{"name": "Content-Type", "value": "application/x-www-form-urlencoded"}],
+      "_type": "request"
+    },
+    {
+      "_id": "req_api_aluno_update",
+      "parentId": "fld_api_alunos",
+      "modified": 1699900300000,
+      "created": 1699900300000,
+      "url": "http://localhost:10000/AP6/api/alunos",
+      "name": "🔄 PUT Update Aluno",
+      "description": "Atualiza aluno existente",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/x-www-form-urlencoded",
+        "params": [
+          {"name": "id", "value": "SUBSTITUA_PELO_ID_DO_ALUNO", "id": "pair_id_update"},
+          {"name": "nome", "value": "Carlos API REST ATUALIZADO", "id": "pair_nome_update"},
+          {"name": "telefone", "value": "(21) 99999-0001", "id": "pair_tel_update"},
+          {"name": "competencias", "value": "Java, REST API, JSON, MongoDB, Servlets, Spring Boot", "id": "pair_comp_update"}
+        ]
+      },
+      "headers": [{"name": "Content-Type", "value": "application/x-www-form-urlencoded"}],
+      "_type": "request"
+    },
+    {
+      "_id": "req_api_aluno_delete",
+      "parentId": "fld_api_alunos",
+      "modified": 1699900400000,
+      "created": 1699900400000,
+      "url": "http://localhost:10000/AP6/api/alunos?id=SUBSTITUA_PELO_ID",
+      "name": "❌ DELETE Aluno",
+      "description": "Exclui aluno por ID",
+      "method": "DELETE",
+      "body": {},
+      "_type": "request"
+    },
+    {
+      "_id": "req_api_empresas_list",
+      "parentId": "fld_api_empresas",
+      "modified": 1699901000000,
+      "created": 1699901000000,
+      "url": "http://localhost:10000/AP6/api/empresas",
+      "name": "🏢 GET All Empresas",
+      "method": "GET",
+      "body": {},
+      "_type": "request"
+    },
+    {
+      "_id": "req_api_empresas_by_setor",
+      "parentId": "fld_api_empresas",
+      "modified": 1699901100000,
+      "created": 1699901100000,
+      "url": "http://localhost:10000/AP6/api/empresas?setor=Tecnologia",
+      "name": "🔍 GET Empresas por Setor",
+      "method": "GET",
+      "body": {},
+      "_type": "request"
+    },
+    {
+      "_id": "req_api_empresa_create",
+      "parentId": "fld_api_empresas",
+      "modified": 1699901200000,
+      "created": 1699901200000,
+      "url": "http://localhost:10000/AP6/api/empresas",
+      "name": "➕ POST Create Empresa",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/x-www-form-urlencoded",
+        "params": [
+          {"name": "nome", "value": "DevCorp API Solutions", "id": "pair_nome_emp_api"},
+          {"name": "cnpj", "value": "98.765.432/0001-10", "id": "pair_cnpj_api"},
+          {"name": "email", "value": "contato@devcorp-api.com.br", "id": "pair_email_emp_api"},
+          {"name": "telefone", "value": "(21) 4444-5555", "id": "pair_tel_emp_api"},
+          {"name": "endereco", "value": "Av. API REST, 456 - Centro - Rio de Janeiro/RJ", "id": "pair_end_api"},
+          {"name": "setor", "value": "Tecnologia da Informação", "id": "pair_setor_api"},
+          {"name": "descricao", "value": "Empresa focada em desenvolvimento de APIs REST modernas", "id": "pair_desc_api"},
+          {"name": "senha", "value": "apirest123", "id": "pair_senha_api"}
+        ]
+      },
+      "headers": [{"name": "Content-Type", "value": "application/x-www-form-urlencoded"}],
+      "_type": "request"
+    },
+    {
+      "_id": "req_api_vagas_list",
+      "parentId": "fld_api_vagas",
+      "modified": 1699902000000,
+      "created": 1699902000000,
+      "url": "http://localhost:10000/AP6/api/vagas",
+      "name": "💼 GET All Vagas",
+      "method": "GET",
+      "body": {},
+      "_type": "request"
+    },
+    {
+      "_id": "req_api_vagas_ativas",
+      "parentId": "fld_api_vagas",
+      "modified": 1699902100000,
+      "created": 1699902100000,
+      "url": "http://localhost:10000/AP6/api/vagas?filtro=ativas",
+      "name": "✅ GET Vagas Ativas",
+      "method": "GET",
+      "body": {},
+      "_type": "request"
+    },
+    {
+      "_id": "req_api_vagas_by_area",
+      "parentId": "fld_api_vagas",
+      "modified": 1699902200000,
+      "created": 1699902200000,
+      "url": "http://localhost:10000/AP6/api/vagas?filtro=area&valor=Tecnologia",
+      "name": "🔍 GET Vagas por Área",
+      "method": "GET",
+      "body": {},
+      "_type": "request"
+    },
+    {
+      "_id": "req_api_vaga_create",
+      "parentId": "fld_api_vagas",
+      "modified": 1699902300000,
+      "created": 1699902300000,
+      "url": "http://localhost:10000/AP6/api/vagas",
+      "name": "➕ POST Create Vaga",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/x-www-form-urlencoded",
+        "params": [
+          {"name": "titulo", "value": "Desenvolvedor API REST Junior", "id": "pair_titulo_api"},
+          {"name": "descricao", "value": "Vaga para desenvolvimento de APIs REST com Java e MongoDB", "id": "pair_desc_vaga_api"},
+          {"name": "empresa", "value": "DevCorp API Solutions", "id": "pair_empresa_api"},
+          {"name": "empresaId", "value": "SUBSTITUA_PELO_ID_DA_EMPRESA", "id": "pair_emp_id_api"},
+          {"name": "area", "value": "Tecnologia da Informação", "id": "pair_area_api"},
+          {"name": "requisitos", "value": "Java, Servlets, MongoDB, JSON, REST API", "id": "pair_req_api"},
+          {"name": "beneficios", "value": "VT, VR, Plano de Saúde, Treinamentos", "id": "pair_ben_api"},
+          {"name": "tipo", "value": "Estágio", "id": "pair_tipo_api"},
+          {"name": "localizacao", "value": "Rio de Janeiro/RJ - Híbrido", "id": "pair_loc_api"},
+          {"name": "salario", "value": "1800.00", "id": "pair_sal_api"}
+        ]
+      },
+      "headers": [{"name": "Content-Type", "value": "application/x-www-form-urlencoded"}],
+      "_type": "request"
+    },
+    {
+      "_id": "req_api_vaga_desativar",
+      "parentId": "fld_api_vagas",
+      "modified": 1699902400000,
+      "created": 1699902400000,
+      "url": "http://localhost:10000/AP6/api/vagas",
+      "name": "⏸️ PUT Desativar Vaga",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/x-www-form-urlencoded",
+        "params": [
+          {"name": "id", "value": "SUBSTITUA_PELO_ID_DA_VAGA", "id": "pair_id_vaga_desativar"},
+          {"name": "operacao", "value": "desativar", "id": "pair_op_desativar"}
+        ]
+      },
+      "headers": [{"name": "Content-Type", "value": "application/x-www-form-urlencoded"}],
+      "_type": "request"
+    },
+    {
+      "_id": "req_test_mongodb_api",
+      "parentId": "wrk_central_vagas_api",
+      "modified": 1699903000000,
+      "created": 1699903000000,
+      "url": "http://localhost:10000/AP6/test-mongo2",
+      "name": "🍃 Test MongoDB Connection",
+      "description": "Testa MongoDB e cria dados iniciais",
+      "method": "GET",
+      "body": {},
+      "_type": "request"
+    },
+    {
+      "_id": "fld_api_alunos",
+      "parentId": "wrk_central_vagas_api",
+      "name": "👥 API Alunos",
+      "description": "Endpoints REST para gerenciar alunos",
+      "_type": "request_group"
+    },
+    {
+      "_id": "fld_api_empresas",
+      "parentId": "wrk_central_vagas_api",
+      "name": "🏢 API Empresas",
+      "description": "Endpoints REST para gerenciar empresas",
+      "_type": "request_group"
+    },
+    {
+      "_id": "fld_api_vagas",
+      "parentId": "wrk_central_vagas_api",
+      "name": "💼 API Vagas",
+      "description": "Endpoints REST para gerenciar vagas",
+      "_type": "request_group"
+    },
+    {
+      "_id": "wrk_central_vagas_api",
+      "parentId": null,
+      "modified": 1699899900000,
+      "created": 1699899900000,
+      "name": "🚀 Central Vagas API REST",
+      "description": "API REST simples usando Servlets + JSON. Aproveita 100% do código MongoDB existente!",
+      "_type": "workspace"
+    }
+  ]
+}
